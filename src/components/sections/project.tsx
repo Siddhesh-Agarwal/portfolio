@@ -1,10 +1,17 @@
-import { ExternalLink } from "lucide-react";
+import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import type { LinkInfo, Project } from "@/types";
-import { buttonVariants } from "../ui/button";
-import { Card, CardAction, CardContent, CardDescription, CardTitle } from "../ui/card";
+import { Button, buttonVariants } from "../ui/button";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardTitle,
+} from "../ui/card";
 
 function ProjectTag({ tag }: { tag: string }) {
   return (
@@ -20,7 +27,8 @@ function ProjectLink({ link }: { link: LinkInfo }) {
       href={link.url}
       target="_blank"
       rel="noreferrer noopener"
-      className={cn(buttonVariants({ variant: "link" }), "px-0 mx-0")}>
+      className={cn(buttonVariants({ variant: "link" }), "px-0 mx-0")}
+    >
       {link.name}
       <ExternalLink />
     </a>
@@ -31,7 +39,9 @@ function ProjectCard({ data }: { data: Project }) {
   return (
     <Card>
       <CardContent>
-        <div className="text-muted-foreground text-lg md:text-2xl mr-4">{formatDate(data.date)}</div>
+        <div className="text-muted-foreground text-lg md:text-2xl mr-4">
+          {formatDate(data.date)}
+        </div>
         <div className="flex flex-col gap-2">
           <CardTitle className="text-xl">{data.name}</CardTitle>
           <CardDescription className="text-lg">{data.desc}</CardDescription>
@@ -54,6 +64,8 @@ function ProjectCard({ data }: { data: Project }) {
 }
 
 export default function ProjectsSection({ details }: { details: Project[] }) {
+  const [showAll, setShowAll] = useState(false);
+
   details.sort((a, b) => {
     if (a.date.year === b.date.year) {
       return b.date.month - a.date.month;
@@ -61,18 +73,42 @@ export default function ProjectsSection({ details }: { details: Project[] }) {
     return b.date.year - a.date.year;
   });
 
+  const visibleProjects = showAll ? details : details.slice(0, 5);
+  const hasMore = details.length > 5;
+
   return (
     <div className="flex flex-col gap-4 w-full mx-auto px-4">
-      <h1 className="text-4xl font-bold mb-6 semibold text-center text-foreground/90">Check out my latest work</h1>
+      <h1 className="text-4xl font-bold mb-6 semibold text-center text-foreground/90">
+        Check out my latest work
+      </h1>
       <h2 className="text-xl text-center text-foreground/75">
-        I have worked on a variety of projects ranging over different tech stacks and topics. Here are few of my
-        favorites.
+        I have worked on a variety of projects ranging over different tech
+        stacks and topics. Here are few of my favorites.
       </h2>
       <div className="flex flex-col gap-4">
-        {details.map((tool: Project) => (
+        {visibleProjects.map((tool: Project) => (
           <ProjectCard key={tool.name} data={tool} />
         ))}
       </div>
+      {hasMore && (
+        <Button
+          variant="ghost"
+          onClick={() => setShowAll(!showAll)}
+          className="mt-4 w-full md:w-auto md:mx-auto"
+        >
+          {showAll ? (
+            <>
+              <ChevronUp />
+              Show Less
+            </>
+          ) : (
+            <>
+              <ChevronDown />
+              Show More
+            </>
+          )}
+        </Button>
+      )}
     </div>
   );
 }
