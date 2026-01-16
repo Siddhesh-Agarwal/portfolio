@@ -48,9 +48,8 @@ export const projectsOrTools: Project[] = [
     desc: "Uploadid is a web application that helps colleges and universities keep track of their Faculty participation and achievements through an easy-to-understand Web User Interface.",
     links: [
       { name: "GitHub", url: "https://github.com/Siddhesh-Agarwal/uploadid" },
-      { name: "Live", url: "https://uploadid.vercel.app/" },
     ],
-    tags: ["Next", "TypeScript", "ShadCN UI", "Supabase", "Vercel"],
+    tags: ["Next", "TypeScript", "ShadCN UI", "Supabase"],
     date: { year: 2024, month: 2 },
   },
   {
@@ -169,24 +168,11 @@ export const projectsOrTools: Project[] = [
     date: { year: 2025, month: 2 },
   },
   {
-    name: "Invoice Generator",
-    desc: "A simple no-nonsense invoice generator for any business. Made using Next.js and TypeScript.",
-    links: [
-      {
-        name: "GitHub",
-        url: "https://github.com/Siddhesh-Agarwal/invoice-generator",
-      },
-      { name: "Live", url: "https://invoice-magic.vercel.app/" },
-    ],
-    tags: ["Vite", "TypeScript"],
-    date: { year: 2025, month: 4 },
-  },
-  {
     name: "ChatSKCET",
     desc: "A chat app for SKCET. Made using TypeScript and Vite without any other external AI libraries. Uses Google search API to fetch relevant information.",
     links: [
       { name: "GitHub", url: "https://github.com/Siddhesh-Agarwal/ChatSKCET" },
-      { name: "Live", url: "https://chat-skcet.vercel.app/" },
+      { name: "Live", url: "https://chatskcet.pages.dev/" },
     ],
     tags: ["TypeScript", "GenAI", "Chatbot"],
     date: { year: 2025, month: 5 },
@@ -208,4 +194,16 @@ export const projectsOrTools: Project[] = [
     tags: ["TypeScript", "Vite", "Hono", "Cloudflare"],
     date: { year: 2025, month: 9 },
   },
+  {
+    name: "micrograd.cpp",
+    desc: "A c++ implementation of Andrej Karpathy's Micrograd library",
+    links: [
+      {
+        name: "GitHub",
+        url: "https://github.com/Siddhesh-Agarwal/micrograd.cpp",
+      }
+    ],
+    tags: ["C++", "AI"],
+    date: {year: 2026, month: 1},
+  }
 ];
