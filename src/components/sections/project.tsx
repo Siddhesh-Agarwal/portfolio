@@ -63,9 +63,15 @@ function ProjectCard({ data }: { data: Project }) {
   );
 }
 
-export default function ProjectsSection({ details }: { details: Project[] }) {
-  const [showAll, setShowAll] = useState(false);
-
+export default function ProjectsSection({
+  details,
+  showCount,
+  setShowCount,
+}: {
+  details: Project[];
+  showCount: number;
+  setShowCount: (count: number) => void;
+}) {
   details.sort((a, b) => {
     if (a.date.year === b.date.year) {
       return b.date.month - a.date.month;
@@ -73,8 +79,8 @@ export default function ProjectsSection({ details }: { details: Project[] }) {
     return b.date.year - a.date.year;
   });
 
-  const visibleProjects = showAll ? details : details.slice(0, 5);
-  const hasMore = details.length > 5;
+  const visibleProjects = details.slice(0, showCount);
+  const hasMore = details.length > showCount;
 
   return (
     <div className="flex flex-col gap-4 w-full mx-auto px-4">
@@ -93,18 +99,20 @@ export default function ProjectsSection({ details }: { details: Project[] }) {
       {hasMore && (
         <Button
           variant="ghost"
-          onClick={() => setShowAll(!showAll)}
+          onClick={() =>
+            hasMore ? setShowCount(showCount + 5) : setShowCount(5)
+          }
           className="mt-4 w-full md:w-auto md:mx-auto"
         >
-          {showAll ? (
-            <>
-              <ChevronUp />
-              Show Less
-            </>
-          ) : (
+          {hasMore ? (
             <>
               <ChevronDown />
               Show More
+            </>
+          ) : (
+            <>
+              <ChevronUp />
+              Show Less
             </>
           )}
         </Button>

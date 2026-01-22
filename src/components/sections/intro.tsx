@@ -72,14 +72,6 @@ export default function IntroSection({ links }: { links: ToolLink[][] }) {
               skills in <strong>Golang</strong> and <strong>React Native</strong>. Always in search of fun projects.
             </p>
           </div>
-          <a
-            href="https://cal.com/siddhesh"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(badgeVariants({ variant: "default" }), "flex items-center gap-2 px-4 py-2")}>
-            <Calendar className="h-4 w-4 stroke-3" />
-            Schedule a Meeting
-          </a>
         </div>
         <Image
           src={MyPic}
