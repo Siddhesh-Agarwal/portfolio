@@ -21,11 +21,13 @@ type SocialLink = {
   link: string;
 };
 
+type NonEmptyArray<T> = [T, ...T[]];
+
 type Project = {
   name: string;
   desc: string;
-  links: [LinkInfo, ...LinkInfo[]]; // Ensures at least one link and unique names
-  tags: [string, ...string[]];
+  links: NonEmptyArray<LinkInfo>;
+  tags: NonEmptyArray<string>;
   date: CustomDate;
 };
 
@@ -50,4 +52,12 @@ type ExperienceDetail = {
   location: string | "remote";
 };
 
-export type { CustomDate, LinkInfo, ToolLink, SocialLink, Project, EducationDetails, ExperienceDetail };
+export type {
+  CustomDate,
+  LinkInfo,
+  ToolLink,
+  SocialLink,
+  Project,
+  EducationDetails,
+  ExperienceDetail,
+};

@@ -1,5 +1,4 @@
 import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
-import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";

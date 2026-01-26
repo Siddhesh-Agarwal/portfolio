@@ -1,11 +1,8 @@
 import { Image } from "@unpic/react";
-import { Calendar } from "lucide-react";
 import MyPic from "@/assets/me.webp";
 import { HyperText } from "@/components/ui/hyper-text";
 import { OrbitingCircles } from "@/components/ui/orbiting-circle";
-import { cn } from "@/lib/utils";
 import type { ToolLink } from "@/types";
-import { badgeVariants } from "../ui/badge";
 
 function ConcentricCircle({
   similarLinks,
@@ -34,7 +31,7 @@ function ConcentricCircle({
 
 function ConcentricCircles({ text, links }: { text: string; links: ToolLink[][] }) {
   return (
-    <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden">
+    <div className="relative flex h-125 w-full flex-col items-center justify-center overflow-hidden">
       <span className="pointer-events-none whitespace-pre-wrap bg-linear-to-b from-foreground to-background bg-clip-text text-center text-6xl font-semibold leading-none text-transparent dark:from-white dark:to-black">
         {text}
       </span>

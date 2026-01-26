@@ -73,7 +73,9 @@ const Theme = ({
   children,
   nonce,
 }: ThemeProviderProps) => {
-  const [theme, setThemeState] = React.useState(() => getTheme(storageKey, defaultTheme));
+  const [theme, setThemeState] = React.useState(() =>
+    getTheme(storageKey, defaultTheme),
+  );
   const attrs = !value ? themes : Object.values(value);
 
   // apply selected theme function (light, dark, system)
@@ -107,7 +109,9 @@ const Theme = ({
     else handleAttribute(attribute);
 
     if (enableColorScheme) {
-      const fallback = colorSchemes.includes(defaultTheme) ? defaultTheme : null;
+      const fallback = colorSchemes.includes(defaultTheme)
+        ? defaultTheme
+        : null;
       const colorScheme = colorSchemes.includes(resolved) ? resolved : fallback;
       // @ts-expect-error
       d.style.colorScheme = colorScheme;
@@ -129,15 +133,17 @@ const Theme = ({
     }
   });
 
-  const handleMediaQuery = React.useEffectEvent((e: MediaQueryListEvent | MediaQueryList) => {
-    const resolved = getSystemTheme(e);
+  const handleMediaQuery = React.useEffectEvent(
+    (e: MediaQueryListEvent | MediaQueryList) => {
+      const resolved = getSystemTheme(e);
 
-    if (theme === "system" && enableSystem && !forcedTheme) {
-      applyTheme("system");
-    } else if (enableSystem) {
-      applyTheme(resolved);
-    }
-  });
+      if (theme === "system" && enableSystem && !forcedTheme) {
+        applyTheme("system");
+      } else if (enableSystem) {
+        applyTheme(resolved);
+      }
+    },
+  );
 
   // Always listen to System preference
   React.useEffect(() => {
@@ -294,7 +300,10 @@ export const script: (...args: any[]) => void = (
   const el = document.documentElement;
   const systemThemes = ["light", "dark"];
   const isClass = attribute === "class";
-  const classes = isClass && value ? themes.map((t: string | number) => value[t] || t) : themes;
+  const classes =
+    isClass && value
+      ? themes.map((t: string | number) => value[t] || t)
+      : themes;
 
   function updateDOM(theme: string) {
     if (isClass) {
@@ -314,7 +323,9 @@ export const script: (...args: any[]) => void = (
   }
 
   function getSystemTheme() {
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   }
 
   if (forcedTheme) {
