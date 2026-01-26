@@ -79,7 +79,7 @@ export default function IntroSection({ links }: { links: ToolLink[][] }) {
           width={192}
           height={192}
           layout="fixed"
-          className="rounded-full p-1 border-2"
+          className="rounded-full p-1 ring-2 ring-primary ring-offset-1 ring-offset-primary-foreground"
         />
       </div>
       <ConcentricCircles text="My Tech Stack" links={links} />
