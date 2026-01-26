@@ -44,9 +44,9 @@ function App() {
 
   return (
     <main className="container-fluid p-0 min-h-screen w-full overflow-x-hidden pb-[75vh]">
-      <div className="max-w-4xl mx-0 md:mx-auto">
+      <div className="max-w-4xl mx-auto">
         <section
-          className="container min-h-screen w-full px-0 grid place-items-center"
+          className="container min-h-screen min-w-full px-0 grid place-items-center"
           id={introId}
         >
           <IntroSection links={toolsKnown} />

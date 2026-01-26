@@ -55,13 +55,13 @@ function ConcentricCircles({ text, links }: { text: string; links: ToolLink[][] 
 
 export default function IntroSection({ links }: { links: ToolLink[][] }) {
   return (
-    <section className="container py-4 max-w-6xl">
-      <div className="flex flex-col md:flex-row items-center">
-        <div className="font-sans px-4">
+    <section className="container py-4 w-full">
+      <div className="flex flex-col md:flex-row gap-8 items-center">
+        <div className="font-sans px-4 flex flex-col gap-6 w-full">
           <h1 className="text-5xl inline">
             <HyperText>Hi, I&apos;m Siddhesh 👋🏻</HyperText>
           </h1>
-          <div className="grid grid-cols-1 gap-6 py-6 pr-8">
+          <div>
             <p className="text-justify">
               I am a <strong>Hobbyist Developer</strong> with a keen interest in{" "}
               <strong>Web Development, DevOps and Gen AI</strong>. I have been programming for the past{" "}
