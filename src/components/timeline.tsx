@@ -1,4 +1,5 @@
 import { type ReactNode, useEffect, useRef, useState } from "react";
+import { Progress } from "@/components/ui/progress";
 
 export default function Timeline({ elements }: { elements: ReactNode[] }) {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -10,20 +11,15 @@ export default function Timeline({ elements }: { elements: ReactNode[] }) {
 
       const timelineElement = timelineRef.current;
       const rect = timelineElement.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+      const viewportCenter = window.innerHeight / 2;
       const timelineTop = rect.top;
       const timelineHeight = rect.height;
 
       let progress = 0;
-      if (timelineTop < windowHeight) {
-        const visibleHeight = Math.min(
-          windowHeight - timelineTop,
-          timelineHeight,
-        );
-        progress = Math.max(0, visibleHeight / timelineHeight);
-      }
+      const centerRelativeToTimeline = viewportCenter - timelineTop;
+      progress = centerRelativeToTimeline / timelineHeight;
 
-      progress = Math.min(progress, 1);
+      progress = Math.max(0, Math.min(progress, 1));
       setScrollProgress(progress);
     };
 
@@ -42,17 +38,12 @@ export default function Timeline({ elements }: { elements: ReactNode[] }) {
 
   return (
     <div ref={timelineRef} className="relative">
-      <div
-        className="absolute left-4 top-4 w-0.5 bg-border"
-        style={{ height: `calc(100% - 2rem)` }}
-      />
+      <div className="absolute left-4 top-4 h-[calc(100%-2rem)] -translate-x-1/2 w-0.5 bg-border" />
 
-      <div
-        className="absolute left-4 top-4 w-0.5 bg-primary transition-all duration-150 ease-out z-10"
-        style={{
-          height: `calc((100% - 2rem) * ${scrollProgress})`,
-          boxShadow: "0 0 8px rgba(59, 130, 246, 0.5)",
-        }}
+      <Progress
+        value={scrollProgress * 100}
+        orientation="vertical"
+        className="absolute left-4 top-4 h-[calc(100%-2rem)] -translate-x-1/2 w-0.5 bg-transparent **:data-[slot=progress-indicator]:bg-primary **:data-[slot=progress-indicator]:shadow-[0_0_8px_rgba(59,130,246,0.5)]"
       />
 
       {elements.map((item, index) => (
