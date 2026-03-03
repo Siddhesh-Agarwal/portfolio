@@ -10,7 +10,7 @@ export const socialLinks: SocialLink[] = [
   {
     name: "Gmail",
     icon: SiGmail,
-    link: "mailto:siddhesh.agarwal@gmail.com",
+    link: "mailto:contact@siddhesh.cc",
   },
   {
     name: "Hashnode",
