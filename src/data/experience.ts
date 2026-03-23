@@ -46,10 +46,18 @@ export const experienceDetails: ExperienceDetail[] = [
   },
   {
     startDate: { month: 7, year: 2025 },
-    endDate: "Current",
+    endDate: { month: 11, year: 2025 },
     company: { name: "Dialmania" },
     position: "Freelance Software Engineer",
     location: "Remote",
     desc: "Created a web-app to allow users to rent VOIP routes. Integrated Magnus Billing to accept Crypto as Payment. It also features and Admin Dashboard that allows monitoring traffic, users, scheduling maintainence among other actions",
   },
+  {
+    startDate: { month: 3, year: 2026 },
+    endDate: "Current",
+    company: { name: "Marqait AI", website: "https://www.marqait.com/" },
+    position: "Software Engineer",
+    location: "Remote",
+    desc: "",
+  }
 ];
