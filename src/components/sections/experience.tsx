@@ -1,22 +1,22 @@
 import { Building2Icon, BuildingIcon, CalendarIcon, MapPinIcon } from "lucide-react";
 import Timeline from "@/components/timeline";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { ShineBorder } from "@/components/ui/shine-border";
 import { formatDate } from "@/lib/date";
 import type { ExperienceDetail } from "@/types";
-import { ShineBorder } from "../ui/shine-border";
 
 function ExperienceCardCompanyInfo({ details }: { details: ExperienceDetail["company"] }) {
   if (details.website) {
     return (
       <a className="flex gap-2" href={details.website} target="_blank" rel="noopener noreferrer">
-        <Building2Icon />
+        <Building2Icon className="size-3" />
         <p className="text-xs text-muted-foreground">{details.name}</p>
       </a>
     );
   }
   return (
     <div className="flex gap-2">
-      <BuildingIcon />
+      <BuildingIcon className="size-3" />
       <p className="text-xs text-muted-foreground">{details.name}</p>
     </div>
   );
@@ -31,13 +31,13 @@ function ExperienceCard({ detail }: { detail: ExperienceDetail }) {
         <div className="flex flex-col gap-2">
           <ExperienceCardCompanyInfo details={detail.company} />
           <div className="flex gap-2">
-            <CalendarIcon />
+            <CalendarIcon className="size-3" />
             <p className="text-xs text-muted-foreground">
               {formatDate(detail.startDate)} - {detail.endDate === "Current" ? "Current" : formatDate(detail.endDate)}
             </p>
           </div>
           <div className="flex gap-2">
-            <MapPinIcon />
+            <MapPinIcon className="size-3" />
             <p className="text-xs text-muted-foreground">{detail.location}</p>
           </div>
         </div>

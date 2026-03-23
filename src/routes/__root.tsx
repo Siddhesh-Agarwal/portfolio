@@ -7,7 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const Route = createRootRoute({
   component: () => (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+    <ThemeProvider defaultTheme="system">
       <NuqsAdapter>
         <TooltipProvider delayDuration={0}>
           <Outlet />
