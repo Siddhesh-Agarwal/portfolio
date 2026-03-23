@@ -1,11 +1,10 @@
 import {
-  SiAmazonwebservices,
   SiApachespark,
   SiBootstrap,
   SiC,
   SiCloudflare,
   SiCplusplus,
-  SiCss3,
+  SiCss,
   SiDjango,
   SiDocker,
   SiExpress,
@@ -22,7 +21,7 @@ import {
   SiLinux,
   SiMongodb,
   SiMysql,
-  SiNeo4J,
+  SiNeo4j,
   SiNextdotjs,
   SiNodedotjs,
   SiPhp,
@@ -39,7 +38,7 @@ import {
   SiTailwindcss,
   SiTensorflow,
   SiTypescript,
-} from "react-icons/si";
+} from "@icons-pack/react-simple-icons";
 import type { ToolLink } from "@/types";
 
 export const toolsKnown: ToolLink[][] = [
@@ -47,7 +46,7 @@ export const toolsKnown: ToolLink[][] = [
     { name: "MySQL", icon: SiMysql },
     { name: "PostgreSQL", icon: SiPostgresql },
     { name: "MongoDB", icon: SiMongodb },
-    { name: "Neo4j", icon: SiNeo4J },
+    { name: "Neo4j", icon: SiNeo4j },
     { name: "Redis", icon: SiRedis },
     { name: "Apache Spark", icon: SiApachespark },
   ],
@@ -62,7 +61,7 @@ export const toolsKnown: ToolLink[][] = [
     { name: "Go", icon: SiGo },
     { name: "GNU Bash", icon: SiGnubash },
     { name: "HTML5", icon: SiHtml5 },
-    { name: "CSS3", icon: SiCss3 },
+    { name: "CSS3", icon: SiCss },
   ],
   [
     { name: "FastAPI", icon: SiFastapi },
@@ -86,7 +85,6 @@ export const toolsKnown: ToolLink[][] = [
     { name: "GitHub", icon: SiGithub },
     { name: "Linux", icon: SiLinux },
     { name: "Docker", icon: SiDocker },
-    { name: "AWS", icon: SiAmazonwebservices },
     { name: "Cloudflare", icon: SiCloudflare },
   ],
 ];

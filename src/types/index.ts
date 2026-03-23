@@ -1,4 +1,6 @@
-import type { IconType } from "react-icons/lib";
+import type * as React from "react";
+
+type IconType = React.FC<React.SVGProps<SVGSVGElement>>;
 
 type CustomDate = {
   year: number;
@@ -52,12 +54,4 @@ type ExperienceDetail = {
   location: string | "remote";
 };
 
-export type {
-  CustomDate,
-  LinkInfo,
-  ToolLink,
-  SocialLink,
-  Project,
-  EducationDetails,
-  ExperienceDetail,
-};
+export type { CustomDate, LinkInfo, ToolLink, SocialLink, Project, EducationDetails, ExperienceDetail };

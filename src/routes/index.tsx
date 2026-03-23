@@ -19,10 +19,7 @@ function App() {
   const introId = useId();
   const experienceId = useId();
   const projectsId = useId();
-  const [showCount, setShowCount] = useQueryState(
-    "projects",
-    parseAsInteger.withDefault(5),
-  );
+  const [showCount, setShowCount] = useQueryState("projects", parseAsInteger.withDefault(5));
 
   const sectionNav = [
     {
@@ -45,22 +42,13 @@ function App() {
   return (
     <main className="container-fluid p-0 min-h-screen w-full overflow-x-hidden pb-[75vh]">
       <div className="max-w-4xl mx-auto">
-        <section
-          className="container min-h-screen min-w-full px-0 grid place-items-center"
-          id={introId}
-        >
+        <section className="container min-h-screen min-w-full px-0 grid place-items-center" id={introId}>
           <IntroSection links={toolsKnown} />
         </section>
-        <section
-          className="container min-h-screen min-w-full px-0 py-6 md:pb-12"
-          id={experienceId}
-        >
+        <section className="container min-h-screen min-w-full px-0 py-6 md:pb-12" id={experienceId}>
           <ExperienceSection details={experienceDetails} />
         </section>
-        <section
-          className="container min-h-screen min-w-full px-0 py-6 md:pb-12"
-          id={projectsId}
-        >
+        <section className="container min-h-screen min-w-full px-0 py-6 md:pb-12" id={projectsId}>
           <ProjectsSection
             details={projectsOrTools}
             showCount={showCount}

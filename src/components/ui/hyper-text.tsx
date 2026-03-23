@@ -1,5 +1,5 @@
+import { AnimatePresence, type MotionProps, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, type MotionProps } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
@@ -126,8 +126,8 @@ export function HyperText({
       onMouseEnter={handleAnimationTrigger}
       {...props}>
       <AnimatePresence>
-        {displayText.map((letter, index) => (
-          <motion.span key={index} className={cn("font-mono", letter === " " ? "w-3" : "")}>
+        {displayText.map((letter) => (
+          <motion.span key={letter} className={cn("font-mono", letter === " " ? "w-3" : "")}>
             {letter.toUpperCase()}
           </motion.span>
         ))}

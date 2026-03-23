@@ -46,9 +46,7 @@ export const projectsOrTools: Project[] = [
   {
     name: "Uploadid",
     desc: "Uploadid is a web application that helps colleges and universities keep track of their Faculty participation and achievements through an easy-to-understand Web User Interface.",
-    links: [
-      { name: "GitHub", url: "https://github.com/Siddhesh-Agarwal/uploadid" },
-    ],
+    links: [{ name: "GitHub", url: "https://github.com/Siddhesh-Agarwal/uploadid" }],
     tags: ["Next", "TypeScript", "ShadCN UI", "Supabase"],
     date: { year: 2024, month: 2 },
   },
@@ -201,9 +199,9 @@ export const projectsOrTools: Project[] = [
       {
         name: "GitHub",
         url: "https://github.com/Siddhesh-Agarwal/micrograd.cpp",
-      }
+      },
     ],
     tags: ["C++", "AI"],
-    date: {year: 2026, month: 1},
-  }
+    date: { year: 2026, month: 1 },
+  },
 ];

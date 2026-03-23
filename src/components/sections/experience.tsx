@@ -1,4 +1,4 @@
-import { FaBuilding, FaCalendar, FaLocationDot } from "react-icons/fa6";
+import { Building2Icon, BuildingIcon, CalendarIcon, MapPinIcon } from "lucide-react";
 import Timeline from "@/components/timeline";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { formatDate } from "@/lib/date";
@@ -9,14 +9,14 @@ function ExperienceCardCompanyInfo({ details }: { details: ExperienceDetail["com
   if (details.website) {
     return (
       <a className="flex gap-2" href={details.website} target="_blank" rel="noopener noreferrer">
-        <FaBuilding />
+        <Building2Icon />
         <p className="text-xs text-muted-foreground">{details.name}</p>
       </a>
     );
   }
   return (
     <div className="flex gap-2">
-      <FaBuilding />
+      <BuildingIcon />
       <p className="text-xs text-muted-foreground">{details.name}</p>
     </div>
   );
@@ -31,13 +31,13 @@ function ExperienceCard({ detail }: { detail: ExperienceDetail }) {
         <div className="flex flex-col gap-2">
           <ExperienceCardCompanyInfo details={detail.company} />
           <div className="flex gap-2">
-            <FaCalendar />
+            <CalendarIcon />
             <p className="text-xs text-muted-foreground">
               {formatDate(detail.startDate)} - {detail.endDate === "Current" ? "Current" : formatDate(detail.endDate)}
             </p>
           </div>
           <div className="flex gap-2">
-            <FaLocationDot />
+            <MapPinIcon />
             <p className="text-xs text-muted-foreground">{detail.location}</p>
           </div>
         </div>

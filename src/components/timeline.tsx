@@ -47,22 +47,14 @@ export default function Timeline({ elements }: { elements: ReactNode[] }) {
       />
 
       {elements.map((item, index) => (
-        <div
-          key={(item?.valueOf() || index).toString()}
-          className="relative flex items-start group"
-        >
+        <div key={(item?.valueOf() || index).toString()} className="relative flex items-start group">
           <div
             className={`relative z-20 flex items-center justify-center w-8 h-8 bg-background border-2 rounded-full shrink-0 transition-colors duration-300 ${
-              scrollProgress > (index + 0.5) / elements.length
-                ? "border-primary"
-                : "border-border"
-            }`}
-          >
+              scrollProgress > (index + 0.5) / elements.length ? "border-primary" : "border-border"
+            }`}>
             <div
               className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                scrollProgress > (index + 0.5) / elements.length
-                  ? "bg-primary"
-                  : "bg-border"
+                scrollProgress > (index + 0.5) / elements.length ? "bg-primary" : "bg-border"
               }`}
             />
           </div>

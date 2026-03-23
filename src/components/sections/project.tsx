@@ -4,13 +4,7 @@ import { formatDate } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import type { LinkInfo, Project } from "@/types";
 import { Button, buttonVariants } from "../ui/button";
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardTitle,
-} from "../ui/card";
+import { Card, CardAction, CardContent, CardDescription, CardTitle } from "../ui/card";
 
 function ProjectTag({ tag }: { tag: string }) {
   return (
@@ -26,8 +20,7 @@ function ProjectLink({ link }: { link: LinkInfo }) {
       href={link.url}
       target="_blank"
       rel="noreferrer noopener"
-      className={cn(buttonVariants({ variant: "link" }), "px-0 mx-0")}
-    >
+      className={cn(buttonVariants({ variant: "link" }), "px-0 mx-0")}>
       {link.name}
       <ExternalLink />
     </a>
@@ -38,9 +31,7 @@ function ProjectCard({ data }: { data: Project }) {
   return (
     <Card>
       <CardContent>
-        <div className="text-muted-foreground text-lg md:text-2xl mr-4">
-          {formatDate(data.date)}
-        </div>
+        <div className="text-muted-foreground text-lg md:text-2xl mr-4">{formatDate(data.date)}</div>
         <div className="flex flex-col gap-2">
           <CardTitle className="text-xl">{data.name}</CardTitle>
           <CardDescription className="text-lg">{data.desc}</CardDescription>
@@ -83,12 +74,10 @@ export default function ProjectsSection({
 
   return (
     <div className="flex flex-col gap-4 w-full mx-auto px-4">
-      <h1 className="text-4xl font-bold mb-6 semibold text-center text-foreground/90">
-        Check out my latest work
-      </h1>
+      <h1 className="text-4xl font-bold mb-6 semibold text-center text-foreground/90">Check out my latest work</h1>
       <h2 className="text-xl text-center text-foreground/75">
-        I have worked on a variety of projects ranging over different tech
-        stacks and topics. Here are few of my favorites.
+        I have worked on a variety of projects ranging over different tech stacks and topics. Here are few of my
+        favorites.
       </h2>
       <div className="flex flex-col gap-4">
         {visibleProjects.map((tool: Project) => (
@@ -98,11 +87,8 @@ export default function ProjectsSection({
       {hasMore && (
         <Button
           variant="ghost"
-          onClick={() =>
-            hasMore ? setShowCount(showCount + 5) : setShowCount(5)
-          }
-          className="mt-4 w-full md:w-auto md:mx-auto"
-        >
+          onClick={() => (hasMore ? setShowCount(showCount + 5) : setShowCount(5))}
+          className="mt-4 w-full md:w-auto md:mx-auto">
           {hasMore ? (
             <>
               <ChevronDown />

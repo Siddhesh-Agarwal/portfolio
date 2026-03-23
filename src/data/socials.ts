@@ -1,4 +1,6 @@
-import { SiGithub, SiGmail, SiHashnode, SiLinkedin } from "react-icons/si";
+import { SiGithub, SiGmail, SiHashnode } from "@icons-pack/react-simple-icons";
+import { FileTextIcon } from "lucide-react";
+import { LinkedinIcon } from "@/components/ui/icons";
 import type { SocialLink } from "@/types";
 
 export const socialLinks: SocialLink[] = [
@@ -19,7 +21,12 @@ export const socialLinks: SocialLink[] = [
   },
   {
     name: "LinkedIn",
-    icon: SiLinkedin,
+    icon: LinkedinIcon,
     link: "https://www.linkedin.com/in/siddhesh-agarwal/",
+  },
+  {
+    name: "Resume",
+    icon: FileTextIcon,
+    link: "https://resume.siddhesh.cc",
   },
 ];

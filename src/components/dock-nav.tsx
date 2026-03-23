@@ -1,3 +1,4 @@
+import type React from "react";
 import type { SocialLink } from "@/types";
 import { ThemeToggle } from "./theme-toggle";
 import { Button } from "./ui/button";
@@ -5,13 +6,7 @@ import { Dock, DockIcon } from "./ui/dock";
 import { Separator } from "./ui/separator";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
-function DocNavLinkButton({
-  link,
-  target,
-}: {
-  link: SocialLink;
-  target: "_self" | "_blank";
-}) {
+function DocNavLinkButton({ link, target }: { link: SocialLink; target: React.HTMLAttributeAnchorTarget }) {
   return (
     <DockIcon className="p-1">
       <Tooltip>
@@ -30,18 +25,11 @@ function DocNavLinkButton({
   );
 }
 
-export default function DockNav({
-  sectionNav,
-  socialLinks,
-}: {
-  sectionNav: SocialLink[];
-  socialLinks: SocialLink[];
-}) {
+export default function DockNav({ sectionNav, socialLinks }: { sectionNav: SocialLink[]; socialLinks: SocialLink[] }) {
   return (
     <Dock
       direction="middle"
-      className="z-50 pointer-events-auto relative flex min-h-full h-full bg-transparent items-center px-0 md:px-2 bg-opacity-75"
-    >
+      className="z-50 pointer-events-auto relative flex min-h-full h-full bg-transparent items-center px-0 md:px-2 bg-opacity-75">
       {sectionNav.map((value: SocialLink) => (
         <DocNavLinkButton link={value} key={value.name} target="_self" />
       ))}
