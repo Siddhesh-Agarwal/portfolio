@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Briefcase, FlaskConical, Info } from "lucide-react";
 import { parseAsInteger, useQueryState } from "nuqs";
-import { useId } from "react";
+
 import DockNav from "@/components/dock-nav";
 import ExperienceSection from "@/components/sections/experience";
 import IntroSection from "@/components/sections/intro";
@@ -16,15 +16,15 @@ export const Route = createFileRoute("/")({
 });
 
 function App() {
-  const introId = useId();
-  const experienceId = useId();
-  const projectsId = useId();
+  const introId = "introduction";
+  const experienceId = "experience";
+  const projectsId = "projects";
   const [showCount, setShowCount] = useQueryState("projects", parseAsInteger.withDefault(5));
 
   const sectionNav = [
     {
       name: "Introduction",
-      link: `#${introId}`,
+      link: `#introduction`,
       icon: Info,
     },
     {
@@ -40,7 +40,7 @@ function App() {
   ];
 
   return (
-    <main className="container-fluid p-0 min-h-screen w-full overflow-x-hidden pb-[75vh]">
+    <main className="bg-background text-foreground container-fluid p-0 min-h-screen w-full overflow-x-hidden pb-[75vh]">
       <div className="max-w-4xl mx-auto">
         <section className="container min-h-screen min-w-full px-0 grid place-items-center" id={introId}>
           <IntroSection links={toolsKnown} />
