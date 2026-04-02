@@ -6,7 +6,6 @@
     "dev": "vite dev",
     "build": "vite build && tsc",
     "serve": "vite preview",
-    "test": "vitest run",
     "format": "biome format --write ./src/",
     "lint": "biome lint --write ./src/",
     "check": "biome check --write ./src/"
@@ -38,6 +37,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.4",
+    "babel-plugin-react-compiler": "^19.0.0-beta-df7b445-20250405",
     "@types/node": "^22.19.6",
     "@types/react": "^19.2.8",
     "@types/react-dom": "^19.2.3",

@@ -14,8 +14,6 @@ interface HyperTextProps extends MotionProps {
   duration?: number;
   /** Delay before animation starts in milliseconds */
   delay?: number;
-  /** Component to render as - defaults to div */
-  as?: React.ElementType;
   /** Whether to start animation when element comes into view */
   startOnView?: boolean;
   /** Whether to trigger animation on hover */
@@ -33,20 +31,15 @@ export function HyperText({
   className,
   duration = 800,
   delay = 0,
-  as: Component = "div",
   startOnView = false,
   animateOnHover = true,
   characterSet = DEFAULT_CHARACTER_SET,
   ...props
 }: HyperTextProps) {
-  const MotionComponent = motion.create(Component, {
-    forwardMotionProps: true,
-  });
-
   const [displayText, setDisplayText] = useState<string[]>(() => children.split(""));
   const [isAnimating, setIsAnimating] = useState(false);
   const iterationCount = useRef(0);
-  const elementRef = useRef<HTMLElement>(null);
+  const elementRef = useRef<HTMLDivElement>(null);
 
   const handleAnimationTrigger = () => {
     if (animateOnHover && !isAnimating) {
@@ -120,18 +113,19 @@ export function HyperText({
   }, [children, duration, isAnimating, characterSet]);
 
   return (
-    <MotionComponent
+    <motion.div
       ref={elementRef}
       className={cn("overflow-hidden py-2 text-4xl font-bold", className)}
       onMouseEnter={handleAnimationTrigger}
       {...props}>
       <AnimatePresence>
-        {displayText.map((letter) => (
-          <motion.span key={letter} className={cn("font-mono", letter === " " ? "w-3" : "")}>
+        {displayText.map((letter, index) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey: array length/order is static
+          <motion.span key={index} className={cn("font-mono", letter === " " ? "w-3" : "")}>
             {letter.toUpperCase()}
           </motion.span>
         ))}
       </AnimatePresence>
-    </MotionComponent>
+    </motion.div>
   );
 }

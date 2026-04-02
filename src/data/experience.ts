@@ -59,5 +59,5 @@ export const experienceDetails: ExperienceDetail[] = [
     position: "Software Engineer",
     location: "Remote",
     desc: "",
-  }
+  },
 ];
