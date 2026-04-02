@@ -41,7 +41,13 @@ function ExperienceCard({ detail }: { detail: ExperienceDetail }) {
             <p className="text-xs text-muted-foreground">{detail.location}</p>
           </div>
         </div>
-        {detail.desc && <p className="text-sm text-card-foreground text-justify">{detail.desc}</p>}
+        {detail.desc.length > 0 && (
+          <ul className="text-sm text-card-foreground list-disc pl-5 space-y-1">
+            {detail.desc.map((point) => (
+              <li key={point} className="list-item">{point}</li>
+            ))}
+          </ul>
+        )}
       </CardContent>
     </Card>
   );

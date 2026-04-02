@@ -50,7 +50,7 @@ type ExperienceDetail = {
     website?: string;
   };
   position: string;
-  desc: string;
+  desc: string[];
   location: string | "remote";
 };
 
