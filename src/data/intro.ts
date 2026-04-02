@@ -1,5 +1,4 @@
 import {
-  SiApachespark,
   SiBootstrap,
   SiC,
   SiCloudflare,
@@ -19,6 +18,7 @@ import {
   SiJavascript,
   SiLaravel,
   SiLinux,
+  SiMariadb,
   SiMongodb,
   SiMysql,
   SiNeo4j,
@@ -26,7 +26,6 @@ import {
   SiNodedotjs,
   SiPhp,
   SiPostgresql,
-  SiPypy,
   SiPython,
   SiPytorch,
   SiReact,
@@ -43,16 +42,15 @@ import type { ToolLink } from "@/types";
 
 export const toolsKnown: ToolLink[][] = [
   [
+    { name: "MariaDB", icon: SiMariadb },
     { name: "MySQL", icon: SiMysql },
     { name: "PostgreSQL", icon: SiPostgresql },
     { name: "MongoDB", icon: SiMongodb },
     { name: "Neo4j", icon: SiNeo4j },
     { name: "Redis", icon: SiRedis },
-    { name: "Apache Spark", icon: SiApachespark },
   ],
   [
     { name: "Python", icon: SiPython },
-    { name: "PyPy", icon: SiPypy },
     { name: "C", icon: SiC },
     { name: "C++", icon: SiCplusplus },
     { name: "JavaScript", icon: SiJavascript },
