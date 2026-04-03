@@ -1,9 +1,8 @@
-import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
+import { ChevronDownIcon, ChevronUpIcon, ExternalLinkIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { formatDate } from "@/lib/date";
-import { cn } from "@/lib/utils";
 import type { LinkInfo, Project } from "@/types";
-import { Button, buttonVariants } from "../ui/button";
+import { Button } from "../ui/button";
 import { Card, CardAction, CardContent, CardDescription, CardTitle } from "../ui/card";
 
 function ProjectTag({ tag }: { tag: string }) {
@@ -20,20 +19,21 @@ function ProjectLink({ link }: { link: LinkInfo }) {
       href={link.url}
       target="_blank"
       rel="noreferrer noopener"
-      className={cn(buttonVariants({ variant: "link" }), "px-0 mx-0")}>
+      className="px-2 flex gap-2 text-primary text-sm items-center hover:underline visited:underline"
+    >
       {link.name}
-      <ExternalLink />
+      <ExternalLinkIcon size={14} />
     </a>
   );
 }
 
 function ProjectCard({ data }: { data: Project }) {
   return (
-    <Card>
+    <Card className="border-border">
       <CardContent>
-        <div className="text-muted-foreground text-lg md:text-2xl mr-4">{formatDate(data.date)}</div>
+        <div className="text-muted-foreground text-xl font-mono mr-4">{formatDate(data.date)}</div>
         <div className="flex flex-col gap-2">
-          <CardTitle className="text-xl">{data.name}</CardTitle>
+          <CardTitle className="text-2xl">{data.name}</CardTitle>
           <CardDescription className="text-lg">{data.desc}</CardDescription>
           <div className="flex flex-row gap-2 text-xs flex-wrap">
             {data.tags.map((tag: string) => (
@@ -91,12 +91,12 @@ export default function ProjectsSection({
           className="mt-4 w-full md:w-auto md:mx-auto">
           {hasMore ? (
             <>
-              <ChevronDown />
+              <ChevronDownIcon />
               Show More
             </>
           ) : (
             <>
-              <ChevronUp />
+              <ChevronUpIcon />
               Show Less
             </>
           )}

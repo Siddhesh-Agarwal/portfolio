@@ -2,7 +2,46 @@ import type { Project } from "@/types";
 
 export const projectsOrTools: Project[] = [
   {
-    name: "LLMPrice.fyi",
+    name: "PDFKit",
+    desc: "Merge, Split, Reorganize, Rotate, Watermark and Edit Metadata instantly — for free. No sign-up. No cloud. No data shared. Ever.",
+    links: [
+      {
+        name: "GitHub",
+        url: "https://github.com/Siddhesh-Agarwal/pdf-kit",
+      },
+      { name: "Live", url: "https://pdfkit.siddhesh.cc/" },
+    ],
+    tags: ["React.js", "TypeScript", "Tanstack"],
+    date: { year: 2026, month: 4 },
+  },
+  {
+    name: "LinkedIn Slop Generator",
+    desc: "A tool to generate slop for LinkedIn posts.",
+    links: [
+      {
+        name: "GitHub",
+        url: "https://github.com/Siddhesh-Agarwal/linkedin-slop-generator",
+      },
+      { name: "Live", url: "https://linkedin-slop.streamlit.app/" },
+    ],
+    tags: ["Python", "Streamlit", "Groq"],
+    date: { year: 2026, month: 3 },
+  },
+  {
+    name: "sid-cn",
+    desc: "A custom shadcn registry with component installable via CLI.",
+    links: [
+      {
+        name: "GitHub",
+        url: "https://github.com/Siddhesh-Agarwal/sid-cn",
+      },
+      { name: "Live", url: "https://ui.siddhesh.cc/" },
+    ],
+    tags: ["React.js", "TypeScript", "Next.js", "shadcn-ui"],
+    date: { year: 2025, month: 7 },
+  },
+  {
+    name: "LLMPrice",
     desc: "A no-nonsense price calculator for various LLM providers.",
     links: [
       {
@@ -11,7 +50,7 @@ export const projectsOrTools: Project[] = [
       },
       { name: "Live", url: "https://llmprice.siddhesh.cc/" },
     ],
-    tags: ["React", "TypeScript", "SWC", "Golang", "Cloudflare Workers"],
+    tags: ["React.js", "TypeScript", "Next.js"],
     date: { year: 2024, month: 12 },
   },
   {
@@ -47,7 +86,7 @@ export const projectsOrTools: Project[] = [
     name: "Uploadid",
     desc: "Uploadid is a web application that helps colleges and universities keep track of their Faculty participation and achievements through an easy-to-understand Web User Interface.",
     links: [{ name: "GitHub", url: "https://github.com/Siddhesh-Agarwal/uploadid" }],
-    tags: ["Next", "TypeScript", "ShadCN UI", "Supabase"],
+    tags: ["Next.js", "TypeScript", "shadcn-ui", "Supabase"],
     date: { year: 2024, month: 2 },
   },
   {
@@ -138,12 +177,12 @@ export const projectsOrTools: Project[] = [
   },
   {
     name: "Matmath",
-    desc: "A Python library to perform matrix and Vector operations. Published on PyPI.",
+    desc: "A Python library written in Cython to perform matrix and Vector operations. Published on PyPI.",
     links: [
       { name: "GitHub", url: "https://github.com/Siddhesh-Agarwal/matmath/" },
       { name: "PyPI", url: "https://pypi.org/project/matmath/" },
     ],
-    tags: ["Python", "PyPI", "Maths"],
+    tags: ["Python", "C", "CPython", "PyPI"],
     date: { year: 2021, month: 6 },
   },
   {

@@ -24,7 +24,7 @@ function ExperienceCardCompanyInfo({ details }: { details: ExperienceDetail["com
 
 function ExperienceCard({ detail }: { detail: ExperienceDetail }) {
   return (
-    <Card className="relative">
+    <Card className="relative border-border">
       <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
       <CardContent className="flex flex-col gap-3">
         <CardTitle>{detail.position}</CardTitle>
