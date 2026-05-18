@@ -54,7 +54,7 @@ export const experienceDetails: ExperienceDetail[] = [
   {
     startDate: { month: 4, year: 2025 },
     endDate: { month: 6, year: 2025 },
-    company: { name: "Venture Group" },
+    company: { name: "Venture Qatar", website: "https://venturaqatar.com/" },
     position: "Freelance Software Engineer",
     location: "Remote",
     desc: [
@@ -77,8 +77,8 @@ export const experienceDetails: ExperienceDetail[] = [
     startDate: { month: 2, year: 2026 },
     endDate: { month: 5, year: 2026 },
     company: {
-      name: "Synergeek",
-      website: "https://linkedin.com/company/synergeek",
+      name: "SERVFIV International pvt. ltd.",
+      website: "https://app.eateszy.com/",
     },
     position: "Software Engineer",
     location: "Remote",
