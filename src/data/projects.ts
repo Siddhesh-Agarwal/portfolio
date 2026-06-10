@@ -3,6 +3,32 @@ import type { Project } from "@/types";
 export const projectsOrTools: Project[] = [
   {
     name: "PDFKit",
+    desc: "Python client for TradingView's news feed API.",
+    links: [
+      {
+        name: "GitHub",
+        url: "https://github.com/Siddhesh-Agarwal/tradingview-news-feed",
+      },
+      { name: "Live", url: "https://pypi.org/project/tradingview-news-feed" },
+    ],
+    tags: ["Python", "PyPI"],
+    date: { year: 2026, month: 6 },
+  },
+  {
+    name: "IBKR SDK",
+    desc: "A Python SDK for interacting with Interactive Brokers API",
+    links: [
+      {
+        name: "GitHub",
+        url: "https://github.com/Siddhesh-Agarwal/ibkr-sdk",
+      },
+      { name: "Live", url: "https://pypi.org/project/ibkr-sdk" },
+    ],
+    tags: ["Python", "PyPI"],
+    date: { year: 2026, month: 5 },
+  },
+  {
+    name: "PDFKit",
     desc: "Merge, Split, Reorganize, Rotate, Watermark and Edit Metadata instantly — for free. No sign-up. No cloud. No data shared. Ever.",
     links: [
       {
