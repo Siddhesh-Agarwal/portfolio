@@ -2,6 +2,45 @@ import type { Project } from "@/types";
 
 export const projectsOrTools: Project[] = [
   {
+    name: "words",
+    desc: "Daily word-based games",
+    links: [
+      {
+        name: "GitHub",
+        url: "https://github.com/Siddhesh-Agarwal/words",
+      },
+      { name: "Live", url: "https://words.siddhesh.cc/" }
+    ],
+    tags: ["TypeScript", "React.js", "Tanstack"],
+    date: { year: 2026, month: 11 },
+  },
+  {
+    name: "flakynet",
+    desc: "A lightweight Python library for Seeded, reproducible network faults for testing real clients over real sockets.",
+    links: [
+      {
+        name: "GitHub",
+        url: "https://github.com/Siddhesh-Agarwal/flakynet",
+      },
+      { name: "PyPI", url: "https://pypi.org/project/flakynet" },
+    ],
+    tags: ["Python", "PyPI"],
+    date: { year: 2026, month: 10 },
+  },
+  {
+    name: "TOTP Generator",
+    desc: "A web-based TOTP (Time-based One-Time Password) generator for 2FA authentication.",
+    links: [
+      {
+        name: "GitHub",
+        url: "https://github.com/Siddhesh-Agarwal/totp-generator",
+      },
+      { name: "Live", url: "https://totp.siddhesh.cc/" }
+    ],
+    tags: ["TypeScript", "React.js", "Web Crypto API"],
+    date: { year: 2026, month: 10 },
+  },
+  {
     name: "TradingView News Feed",
     desc: "Python client for TradingView's news feed API.",
     links: [
