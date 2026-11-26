@@ -1,15 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Briefcase, FlaskConical, Info } from "lucide-react";
-import { parseAsInteger, useQueryState } from "nuqs";
 
-import DockNav from "@/components/dock-nav";
+import PageLayout from "@/components/page-layout";
 import ExperienceSection from "@/components/sections/experience";
 import IntroSection from "@/components/sections/intro";
-import ProjectsSection from "@/components/sections/project";
+import { Button } from "@/components/ui/button";
 import { experienceDetails } from "@/data/experience";
 import { toolsKnown } from "@/data/intro";
-import { projectsOrTools } from "@/data/projects";
-import { socialLinks } from "@/data/socials";
 
 export const Route = createFileRoute("/")({
   component: App,
@@ -18,13 +15,11 @@ export const Route = createFileRoute("/")({
 function App() {
   const introId = "introduction";
   const experienceId = "experience";
-  const projectsId = "projects";
-  const [showCount, setShowCount] = useQueryState("projects", parseAsInteger.withDefault(5));
 
   const sectionNav = [
     {
       name: "Introduction",
-      link: `#introduction`,
+      link: `#${introId}`,
       icon: Info,
     },
     {
@@ -34,31 +29,24 @@ function App() {
     },
     {
       name: "Projects",
-      link: `#${projectsId}`,
+      link: "/projects",
       icon: FlaskConical,
     },
   ];
 
   return (
-    <main className="bg-background text-foreground container-fluid p-0 min-h-screen w-full overflow-x-hidden pb-[75vh]">
-      <div className="max-w-4xl mx-auto">
-        <section className="container min-h-screen min-w-full px-0 grid place-items-center" id={introId}>
-          <IntroSection links={toolsKnown} />
-        </section>
-        <section className="container min-h-screen min-w-full px-0 py-6 md:pb-12" id={experienceId}>
-          <ExperienceSection details={experienceDetails} />
-        </section>
-        <section className="container min-h-screen min-w-full px-0 py-6 md:pb-12" id={projectsId}>
-          <ProjectsSection
-            details={projectsOrTools}
-            showCount={showCount}
-            setShowCount={(count: number) => setShowCount(count)}
-          />
-        </section>
+    <PageLayout sectionNav={sectionNav}>
+      <section className="container min-h-screen min-w-full px-0 grid place-items-center" id={introId}>
+        <IntroSection links={toolsKnown} />
+      </section>
+      <section className="container min-h-screen min-w-full px-0 py-6 md:pb-12" id={experienceId}>
+        <ExperienceSection details={experienceDetails} />
+      </section>
+      <div className="flex justify-center px-4 pb-8 md:hidden">
+        <Button asChild variant="outline">
+          <Link to="/projects">View all projects</Link>
+        </Button>
       </div>
-      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto hidden md:flex origin-bottom h-full max-h-14 mb-16">
-        <DockNav sectionNav={sectionNav} socialLinks={socialLinks} />
-      </div>
-    </main>
+    </PageLayout>
   );
 }
