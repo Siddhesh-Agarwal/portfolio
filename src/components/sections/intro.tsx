@@ -1,6 +1,6 @@
 import { Image } from "@unpic/react";
-import Hero from "@/assets/hero.svg";
 import MyPic from "@/assets/me.webp";
+import HeroScene from "@/components/hero-scene";
 import StackIndex from "@/components/stack-index";
 import type { ToolGroup } from "@/types";
 
@@ -29,13 +29,7 @@ export default function IntroSection({ groups }: { groups: ToolGroup[] }) {
           </p>
         </div>
         <div className="overflow-hidden rounded-2xl border border-border">
-          <img
-            src={Hero}
-            alt="Isometric illustration of my developer desk with dual monitors, a mechanical keyboard, a server rack, and a rubber duck."
-            width={1200}
-            height={860}
-            className="block h-auto w-full"
-          />
+          <HeroScene />
         </div>
       </div>
       <div className="px-4">

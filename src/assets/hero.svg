@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-600 -620 1200 860" width="1200" height="860" role="img" aria-labelledby="heroTitle heroDesc">
-<title id="heroTitle">Isometric developer desk</title>
-<desc id="heroDesc">An isometric developer desk with two monitors, a mechanical keyboard, a coffee mug, a potted plant, a rubber duck, and a server rack, with sodium orange highlights.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-600 -620 1200 860" width="1200" height="860" class="hero-scene" role="group" aria-labelledby="heroTitle heroDesc">
+<title id="heroTitle">Interactive isometric developer desk and server rack</title>
+<desc id="heroDesc">An isometric developer desk with a single wide monitor, a mechanical keyboard, a coffee mug, a rubber duck, and an open server rack with seven servers and a network switch, in sodium orange highlights. Click the monitor to power the computer, click the keyboard keys for light feedback, and click a server or press 1 to 7 to toggle it.</desc>
+<!-- Interactive hooks: [data-hero-power], [data-server], [data-key], [data-action]. Behaviour lives in src/components/hero-scene.tsx. -->
 <defs>
   <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
     <feGaussianBlur stdDeviation="14"/>
@@ -8,7 +9,86 @@
   <filter id="softSm" x="-50%" y="-50%" width="200%" height="200%">
     <feGaussianBlur stdDeviation="6"/>
   </filter>
+  <filter id="heroGlow" x="-80%" y="-80%" width="260%" height="260%">
+    <feGaussianBlur stdDeviation="1.5" result="blur"/>
+    <feMerge>
+      <feMergeNode in="blur"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
 </defs>
+<style>
+  .hero-scene {
+    --hero-accent: #FF9A2E;
+    --hero-accent-hi: #FFB25E;
+  }
+  .hero-scene [data-hero-power],
+  .hero-scene [data-server],
+  .hero-scene [data-key],
+  .hero-scene [data-action] { cursor: pointer; }
+  .hero-scene:focus-visible { outline: 2px solid var(--hero-accent); outline-offset: -2px; }
+  .hero-scene [data-hero-power]:focus-visible,
+  .hero-scene [data-server]:focus-visible { outline: none; }
+  .hero-scene [data-hero-power]:focus-visible .hero-focus-ring,
+  .hero-scene [data-server]:focus-visible .hero-focus-ring { opacity: 1; }
+
+  .hero-key .hero-key-top { transition: fill .12s ease, opacity .12s ease; }
+  .hero-key .hero-key-label { transition: fill .12s ease; pointer-events: none; }
+  .hero-key:hover .hero-key-top { fill: #4A5563; }
+  .hero-key.is-accent:hover .hero-key-top { fill: var(--hero-accent-hi); }
+  .hero-key.is-pressed .hero-key-top { fill: #FFD09A; }
+  .hero-key.is-pressed .hero-key-label { fill: #11161D; }
+
+  .hero-server .server-panel { transition: fill .16s ease, stroke .16s ease; }
+  .hero-server:hover .server-panel { fill: #303945; stroke: #6A7785; }
+  .hero-server.is-on .server-panel { fill: #2C343E; }
+  .hero-server.is-on .server-power-ring { stroke: var(--hero-accent); }
+  .hero-server.is-on .server-power-dot { fill: var(--hero-accent); }
+  .hero-server.is-on .led-a { fill: var(--hero-accent); animation: hero-blink 1.25s steps(1, end) infinite; }
+  .hero-server.is-on .led-b { fill: #7FB69B; animation: hero-blink 1.25s steps(1, end) infinite; animation-delay: -.58s; }
+  .hero-server:not(.is-on) .led-a,
+  .hero-server:not(.is-on) .led-b { fill: #454F5C; animation: none; }
+
+  .hero-traffic {
+    fill: none;
+    pointer-events: none;
+    stroke: #454F5C;
+    stroke-width: .9;
+    stroke-linecap: round;
+    stroke-dasharray: 2.5 4.5;
+    opacity: .28;
+    transition: opacity .18s ease, stroke .18s ease;
+  }
+  .hero-traffic.is-on {
+    stroke: var(--hero-accent);
+    opacity: .95;
+    animation: hero-traffic 1.15s linear infinite;
+  }
+
+  .hero-switch .switch-led { animation: hero-blink 1.6s steps(1, end) infinite; }
+  .hero-switch.is-busy .switch-led { animation-duration: .62s; }
+
+  .hero-sleep-overlay,
+  .hero-standby { transition: opacity .25s ease; }
+  .hero-scene.is-off .hero-sleep-overlay { opacity: 1; }
+  .hero-scene.is-off .hero-standby { opacity: 1; }
+  .hero-scene.is-off .hero-power-led { fill: #454F5C; }
+  .hero-scene.is-off .hero-key .hero-key-top { opacity: .72; }
+
+  @keyframes hero-blink {
+    0%, 55% { opacity: 1; }
+    56%, 100% { opacity: .18; }
+  }
+  @keyframes hero-traffic {
+    to { stroke-dashoffset: -14; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-scene .hero-server .led-a,
+    .hero-scene .hero-server .led-b,
+    .hero-scene .hero-traffic,
+    .hero-scene .switch-led { animation: none !important; }
+  }
+</style>
 <polygon points="277.13,150 230.36,173.06 177.93,191.61 121.11,205.2 61.31,213.49 0,216.27 -61.31,213.49 -121.11,205.2 -177.93,191.61 -230.36,173.06 -277.13,150 -317.07,123 -349.2,92.73 -372.74,59.92 -387.09,25.4 -391.92,-10 -387.09,-45.4 -372.74,-79.92 -349.2,-112.73 -317.07,-143 -277.13,-170 -230.36,-193.06 -177.93,-211.61 -121.11,-225.2 -61.31,-233.49 0,-236.27 61.31,-233.49 121.11,-225.2 177.93,-211.61 230.36,-193.06 277.13,-170 317.07,-143 349.2,-112.73 372.74,-79.92 387.09,-45.4 391.92,-10 387.09,25.4 372.74,59.92 349.2,92.73 317.07,123" fill="#2A3038" opacity=".10" filter="url(#soft)"/>
 <polygon points="207.85,110 168.6,129.01 124.22,143.81 76.08,153.92 25.62,159.06 -25.62,159.06 -76.08,153.92 -124.22,143.81 -168.6,129.01 -207.85,110 -240.78,87.34 -266.4,61.72 -283.92,33.92 -292.82,4.79 -292.82,-24.79 -283.92,-53.92 -266.4,-81.72 -240.78,-107.34 -207.85,-130 -168.6,-149.01 -124.22,-163.81 -76.08,-173.92 -25.62,-179.06 25.62,-179.06 76.08,-173.92 124.22,-163.81 168.6,-149.01 207.85,-130 240.78,-107.34 266.4,-81.72 283.92,-53.92 292.82,-24.79 292.82,4.79 283.92,33.92 266.4,61.72 240.78,87.34" fill="#2A3038" opacity=".06" filter="url(#soft)"/>
 <polygon points="-233.83,-160 -254.2,-150.62 -277.67,-144.09 -303.07,-140.75 -329.13,-140.75 -354.53,-144.09 -378,-150.62 -398.37,-160 -414.62,-171.76 -425.92,-185.31 -431.72,-199.98 -431.72,-215.02 -425.92,-229.69 -414.62,-243.24 -398.37,-255 -378,-264.38 -354.53,-270.91 -329.13,-274.25 -303.07,-274.25 -277.67,-270.91 -254.2,-264.38 -233.83,-255 -217.58,-243.24 -206.28,-229.69 -200.48,-215.02 -200.48,-199.98 -206.28,-185.31 -217.58,-171.76" fill="#2A3038" opacity=".12" filter="url(#soft)"/>
@@ -19,103 +99,134 @@
 <polygon points="-301.38,-164 -311.77,-158 -311.77,-168 -301.38,-174" fill="#1B2128" /><polygon points="-322.16,-164 -311.77,-158 -311.77,-168 -322.16,-174" fill="#232A33" /><polygon points="-311.77,-180 -301.38,-174 -311.77,-168 -322.16,-174" fill="#353D48" />
 <polygon points="-216.51,-215 -311.77,-160 -311.77,-450 -216.51,-505" fill="#1B2128" /><polygon points="-415.69,-220 -311.77,-160 -311.77,-450 -415.69,-510" fill="#232A33" /><polygon points="-320.43,-565 -216.51,-505 -311.77,-450 -415.69,-510" fill="#353D48" />
 <g transform="matrix(0.8660 0.5000 0.0000 1.0000 -409.02 -493.85)"><rect width="104" height="270" rx="2" fill="#151A21" stroke="#10151B" stroke-width="1.2"/></g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -405.91 -479.65)">
-    <rect width="96" height="14" rx="1.5" fill="#2E3640" stroke="#454F5C" stroke-width="0.6"/>
-    <rect x="4" y="4" width="5" height="5" rx="1" fill="#FF9A2E"/>
-    <rect x="12" y="5" width="66" height="3.5" rx="1" fill="#454F5C" opacity=".55"/>
-    <circle cx="86" cy="7" r="1.8" fill="#FF9A2E"/>
-    <circle cx="94" cy="7" r="1.8" fill="#7FB69B"/>
-  </g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -405.91 -461.65)">
-    <rect width="96" height="14" rx="1.5" fill="#252C35" stroke="#454F5C" stroke-width="0.6"/>
-    <rect x="4" y="4" width="5" height="5" rx="1" fill="#454F5C"/>
-    <rect x="12" y="5" width="66" height="3.5" rx="1" fill="#454F5C" opacity=".55"/>
-    <circle cx="86" cy="7" r="1.8" fill="#454F5C"/>
-    <circle cx="94" cy="7" r="1.8" fill="#454F5C"/>
-  </g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -405.91 -443.65)">
-    <rect width="96" height="14" rx="1.5" fill="#252C35" stroke="#454F5C" stroke-width="0.6"/>
-    <rect x="4" y="4" width="5" height="5" rx="1" fill="#454F5C"/>
-    <rect x="12" y="5" width="66" height="3.5" rx="1" fill="#454F5C" opacity=".55"/>
-    <circle cx="86" cy="7" r="1.8" fill="#454F5C"/>
-    <circle cx="94" cy="7" r="1.8" fill="#454F5C"/>
-  </g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -405.91 -425.65)">
-    <rect width="96" height="14" rx="1.5" fill="#2E3640" stroke="#454F5C" stroke-width="0.6"/>
-    <rect x="4" y="4" width="5" height="5" rx="1" fill="#7FB69B"/>
-    <rect x="12" y="5" width="66" height="3.5" rx="1" fill="#454F5C" opacity=".55"/>
-    <circle cx="86" cy="7" r="1.8" fill="#454F5C"/>
-    <circle cx="94" cy="7" r="1.8" fill="#454F5C"/>
-  </g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -405.91 -407.65)">
-    <rect width="96" height="14" rx="1.5" fill="#252C35" stroke="#454F5C" stroke-width="0.6"/>
-    <rect x="4" y="4" width="5" height="5" rx="1" fill="#FF9A2E"/>
-    <rect x="12" y="5" width="66" height="3.5" rx="1" fill="#454F5C" opacity=".55"/>
-    <circle cx="86" cy="7" r="1.8" fill="#454F5C"/>
-    <circle cx="94" cy="7" r="1.8" fill="#454F5C"/>
-  </g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -405.91 -389.65)">
-    <rect width="96" height="14" rx="1.5" fill="#252C35" stroke="#454F5C" stroke-width="0.6"/>
-    <rect x="4" y="4" width="5" height="5" rx="1" fill="#454F5C"/>
-    <rect x="12" y="5" width="66" height="3.5" rx="1" fill="#454F5C" opacity=".55"/>
-    <circle cx="86" cy="7" r="1.8" fill="#FF9A2E"/>
-    <circle cx="94" cy="7" r="1.8" fill="#454F5C"/>
-  </g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -405.91 -371.65)">
-    <rect width="96" height="14" rx="1.5" fill="#2E3640" stroke="#454F5C" stroke-width="0.6"/>
-    <rect x="4" y="4" width="5" height="5" rx="1" fill="#7FB69B"/>
-    <rect x="12" y="5" width="66" height="3.5" rx="1" fill="#454F5C" opacity=".55"/>
-    <circle cx="86" cy="7" r="1.8" fill="#454F5C"/>
-    <circle cx="94" cy="7" r="1.8" fill="#454F5C"/>
-  </g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -405.91 -353.65)">
-    <rect width="96" height="14" rx="1.5" fill="#252C35" stroke="#454F5C" stroke-width="0.6"/>
-    <rect x="4" y="4" width="5" height="5" rx="1" fill="#454F5C"/>
-    <rect x="12" y="5" width="66" height="3.5" rx="1" fill="#454F5C" opacity=".55"/>
-    <circle cx="86" cy="7" r="1.8" fill="#454F5C"/>
-    <circle cx="94" cy="7" r="1.8" fill="#7FB69B"/>
-  </g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -405.91 -335.65)">
-    <rect width="96" height="14" rx="1.5" fill="#252C35" stroke="#454F5C" stroke-width="0.6"/>
-    <rect x="4" y="4" width="5" height="5" rx="1" fill="#FF9A2E"/>
-    <rect x="12" y="5" width="66" height="3.5" rx="1" fill="#454F5C" opacity=".55"/>
-    <circle cx="86" cy="7" r="1.8" fill="#454F5C"/>
-    <circle cx="94" cy="7" r="1.8" fill="#454F5C"/>
-  </g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -405.91 -317.65)">
-    <rect width="96" height="14" rx="1.5" fill="#2E3640" stroke="#454F5C" stroke-width="0.6"/>
-    <rect x="4" y="4" width="5" height="5" rx="1" fill="#7FB69B"/>
-    <rect x="12" y="5" width="66" height="3.5" rx="1" fill="#454F5C" opacity=".55"/>
-    <circle cx="86" cy="7" r="1.8" fill="#454F5C"/>
-    <circle cx="94" cy="7" r="1.8" fill="#454F5C"/>
-  </g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -405.91 -299.65)">
-    <rect width="96" height="14" rx="1.5" fill="#252C35" stroke="#454F5C" stroke-width="0.6"/>
-    <rect x="4" y="4" width="5" height="5" rx="1" fill="#454F5C"/>
-    <rect x="12" y="5" width="66" height="3.5" rx="1" fill="#454F5C" opacity=".55"/>
-    <circle cx="86" cy="7" r="1.8" fill="#FF9A2E"/>
-    <circle cx="94" cy="7" r="1.8" fill="#454F5C"/>
-  </g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -405.91 -281.65)">
-    <rect width="96" height="14" rx="1.5" fill="#252C35" stroke="#454F5C" stroke-width="0.6"/>
-    <rect x="4" y="4" width="5" height="5" rx="1" fill="#454F5C"/>
-    <rect x="12" y="5" width="66" height="3.5" rx="1" fill="#454F5C" opacity=".55"/>
-    <circle cx="86" cy="7" r="1.8" fill="#454F5C"/>
-    <circle cx="94" cy="7" r="1.8" fill="#454F5C"/>
-  </g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -405.91 -263.65)">
-    <rect width="96" height="14" rx="1.5" fill="#2E3640" stroke="#454F5C" stroke-width="0.6"/>
-    <rect x="4" y="4" width="5" height="5" rx="1" fill="#FF9A2E"/>
-    <rect x="12" y="5" width="66" height="3.5" rx="1" fill="#454F5C" opacity=".55"/>
-    <circle cx="86" cy="7" r="1.8" fill="#454F5C"/>
-    <circle cx="94" cy="7" r="1.8" fill="#454F5C"/>
-  </g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -405.91 -245.65)">
-    <rect width="96" height="14" rx="1.5" fill="#252C35" stroke="#454F5C" stroke-width="0.6"/>
-    <rect x="4" y="4" width="5" height="5" rx="1" fill="#454F5C"/>
-    <rect x="12" y="5" width="66" height="3.5" rx="1" fill="#454F5C" opacity=".55"/>
-    <circle cx="86" cy="7" r="1.8" fill="#454F5C"/>
-    <circle cx="94" cy="7" r="1.8" fill="#454F5C"/>
+  <g id="hero-rack-panels" transform="matrix(0.8660 0.5000 0.0000 1.0000 -409.02 -493.85)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+    <g class="hero-switch" aria-label="Network switch, always on">
+      <rect x="4" y="12" width="96" height="22" rx="2" fill="#2E3640" stroke="#454F5C" stroke-width=".6"/>
+      <circle class="switch-led" cx="11" cy="23" r="1.8" fill="#7FB69B"/>
+      <text x="17" y="25" font-size="4.6" fill="#C9D3DE" letter-spacing=".5">sw-01</text>
+      <text id="hero-switch-count" x="44" y="25" font-size="3.8" fill="#7C8A99">4 LINKS</text>
+      <rect x="79" y="17" width="4" height="4" rx=".6" fill="#1B2128" stroke="#596675" stroke-width=".4"/>
+      <rect x="85" y="17" width="4" height="4" rx=".6" fill="#1B2128" stroke="#596675" stroke-width=".4"/>
+      <rect x="91" y="17" width="4" height="4" rx=".6" fill="#FF9A2E" stroke="#FF9A2E" stroke-width=".4"/>
+      <rect x="79" y="24" width="4" height="4" rx=".6" fill="#1B2128" stroke="#596675" stroke-width=".4"/>
+      <rect x="85" y="24" width="4" height="4" rx=".6" fill="#1B2128" stroke="#596675" stroke-width=".4"/>
+      <rect x="91" y="24" width="4" height="4" rx=".6" fill="#1B2128" stroke="#596675" stroke-width=".4"/>
+      <text x="11" y="31" font-size="3.2" fill="#596675" letter-spacing=".7">UPLINK / 10G</text>
+      <title>Network switch — always on</title>
+    </g>
+    <g class="hero-server is-on" data-server="0" role="button" tabindex="0" aria-label="Server 1, online. Click or press 1 to toggle." aria-pressed="true">
+      <rect class="server-panel" x="4" y="42" width="96" height="22" rx="2" fill="#252C35" stroke="#454F5C" stroke-width=".6"/>
+      <rect class="hero-focus-ring" x="3" y="41" width="98" height="24" rx="3" fill="none" stroke="#FF9A2E" stroke-width="1.2" opacity="0"/>
+      <circle class="server-power-ring" cx="11" cy="53" r="3.3" fill="#1B2128" stroke="#454F5C" stroke-width=".8"/>
+      <circle class="server-power-dot" cx="11" cy="53" r="1.15" fill="#FF9A2E"/>
+      <text x="18" y="54.8" font-size="4.5" fill="#8B97A5" letter-spacing=".4">srv-01</text>
+      <rect x="42" y="48.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <rect x="42" y="52.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <rect x="42" y="56.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <circle class="led-a" cx="76" cy="53" r="1.8" fill="#454F5C"/>
+      <circle class="led-b" cx="83" cy="53" r="1.8" fill="#454F5C"/>
+      <circle cx="91" cy="53" r="1.1" fill="#454F5C"/>
+      <title>Server 1 — online</title>
+    </g>
+    <g class="hero-server is-on" data-server="1" role="button" tabindex="0" aria-label="Server 2, online. Click or press 2 to toggle." aria-pressed="true">
+      <rect class="server-panel" x="4" y="68" width="96" height="22" rx="2" fill="#252C35" stroke="#454F5C" stroke-width=".6"/>
+      <rect class="hero-focus-ring" x="3" y="67" width="98" height="24" rx="3" fill="none" stroke="#FF9A2E" stroke-width="1.2" opacity="0"/>
+      <circle class="server-power-ring" cx="11" cy="79" r="3.3" fill="#1B2128" stroke="#454F5C" stroke-width=".8"/>
+      <circle class="server-power-dot" cx="11" cy="79" r="1.15" fill="#FF9A2E"/>
+      <text x="18" y="80.8" font-size="4.5" fill="#8B97A5" letter-spacing=".4">srv-02</text>
+      <rect x="42" y="74.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <rect x="42" y="78.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <rect x="42" y="82.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <circle class="led-a" cx="76" cy="79" r="1.8" fill="#454F5C"/>
+      <circle class="led-b" cx="83" cy="79" r="1.8" fill="#454F5C"/>
+      <circle cx="91" cy="79" r="1.1" fill="#454F5C"/>
+      <title>Server 2 — online</title>
+    </g>
+    <g class="hero-server" data-server="2" role="button" tabindex="0" aria-label="Server 3, offline. Click or press 3 to toggle." aria-pressed="false">
+      <rect class="server-panel" x="4" y="94" width="96" height="22" rx="2" fill="#252C35" stroke="#454F5C" stroke-width=".6"/>
+      <rect class="hero-focus-ring" x="3" y="93" width="98" height="24" rx="3" fill="none" stroke="#FF9A2E" stroke-width="1.2" opacity="0"/>
+      <circle class="server-power-ring" cx="11" cy="105" r="3.3" fill="#1B2128" stroke="#454F5C" stroke-width=".8"/>
+      <circle class="server-power-dot" cx="11" cy="105" r="1.15" fill="#454F5C"/>
+      <text x="18" y="106.8" font-size="4.5" fill="#8B97A5" letter-spacing=".4">srv-03</text>
+      <rect x="42" y="100.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <rect x="42" y="104.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <rect x="42" y="108.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <circle class="led-a" cx="76" cy="105" r="1.8" fill="#454F5C"/>
+      <circle class="led-b" cx="83" cy="105" r="1.8" fill="#454F5C"/>
+      <circle cx="91" cy="105" r="1.1" fill="#454F5C"/>
+      <title>Server 3 — offline</title>
+    </g>
+    <g class="hero-server is-on" data-server="3" role="button" tabindex="0" aria-label="Server 4, online. Click or press 4 to toggle." aria-pressed="true">
+      <rect class="server-panel" x="4" y="120" width="96" height="22" rx="2" fill="#252C35" stroke="#454F5C" stroke-width=".6"/>
+      <rect class="hero-focus-ring" x="3" y="119" width="98" height="24" rx="3" fill="none" stroke="#FF9A2E" stroke-width="1.2" opacity="0"/>
+      <circle class="server-power-ring" cx="11" cy="131" r="3.3" fill="#1B2128" stroke="#454F5C" stroke-width=".8"/>
+      <circle class="server-power-dot" cx="11" cy="131" r="1.15" fill="#FF9A2E"/>
+      <text x="18" y="132.8" font-size="4.5" fill="#8B97A5" letter-spacing=".4">srv-04</text>
+      <rect x="42" y="126.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <rect x="42" y="130.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <rect x="42" y="134.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <circle class="led-a" cx="76" cy="131" r="1.8" fill="#454F5C"/>
+      <circle class="led-b" cx="83" cy="131" r="1.8" fill="#454F5C"/>
+      <circle cx="91" cy="131" r="1.1" fill="#454F5C"/>
+      <title>Server 4 — online</title>
+    </g>
+    <g class="hero-server" data-server="4" role="button" tabindex="0" aria-label="Server 5, offline. Click or press 5 to toggle." aria-pressed="false">
+      <rect class="server-panel" x="4" y="146" width="96" height="22" rx="2" fill="#252C35" stroke="#454F5C" stroke-width=".6"/>
+      <rect class="hero-focus-ring" x="3" y="145" width="98" height="24" rx="3" fill="none" stroke="#FF9A2E" stroke-width="1.2" opacity="0"/>
+      <circle class="server-power-ring" cx="11" cy="157" r="3.3" fill="#1B2128" stroke="#454F5C" stroke-width=".8"/>
+      <circle class="server-power-dot" cx="11" cy="157" r="1.15" fill="#454F5C"/>
+      <text x="18" y="158.8" font-size="4.5" fill="#8B97A5" letter-spacing=".4">srv-05</text>
+      <rect x="42" y="152.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <rect x="42" y="156.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <rect x="42" y="160.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <circle class="led-a" cx="76" cy="157" r="1.8" fill="#454F5C"/>
+      <circle class="led-b" cx="83" cy="157" r="1.8" fill="#454F5C"/>
+      <circle cx="91" cy="157" r="1.1" fill="#454F5C"/>
+      <title>Server 5 — offline</title>
+    </g>
+    <g class="hero-server" data-server="5" role="button" tabindex="0" aria-label="Server 6, offline. Click or press 6 to toggle." aria-pressed="false">
+      <rect class="server-panel" x="4" y="172" width="96" height="22" rx="2" fill="#252C35" stroke="#454F5C" stroke-width=".6"/>
+      <rect class="hero-focus-ring" x="3" y="171" width="98" height="24" rx="3" fill="none" stroke="#FF9A2E" stroke-width="1.2" opacity="0"/>
+      <circle class="server-power-ring" cx="11" cy="183" r="3.3" fill="#1B2128" stroke="#454F5C" stroke-width=".8"/>
+      <circle class="server-power-dot" cx="11" cy="183" r="1.15" fill="#454F5C"/>
+      <text x="18" y="184.8" font-size="4.5" fill="#8B97A5" letter-spacing=".4">srv-06</text>
+      <rect x="42" y="178.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <rect x="42" y="182.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <rect x="42" y="186.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <circle class="led-a" cx="76" cy="183" r="1.8" fill="#454F5C"/>
+      <circle class="led-b" cx="83" cy="183" r="1.8" fill="#454F5C"/>
+      <circle cx="91" cy="183" r="1.1" fill="#454F5C"/>
+      <title>Server 6 — offline</title>
+    </g>
+    <g class="hero-server is-on" data-server="6" role="button" tabindex="0" aria-label="Server 7, online. Click or press 7 to toggle." aria-pressed="true">
+      <rect class="server-panel" x="4" y="198" width="96" height="22" rx="2" fill="#252C35" stroke="#454F5C" stroke-width=".6"/>
+      <rect class="hero-focus-ring" x="3" y="197" width="98" height="24" rx="3" fill="none" stroke="#FF9A2E" stroke-width="1.2" opacity="0"/>
+      <circle class="server-power-ring" cx="11" cy="209" r="3.3" fill="#1B2128" stroke="#454F5C" stroke-width=".8"/>
+      <circle class="server-power-dot" cx="11" cy="209" r="1.15" fill="#FF9A2E"/>
+      <text x="18" y="210.8" font-size="4.5" fill="#8B97A5" letter-spacing=".4">srv-07</text>
+      <rect x="42" y="204.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <rect x="42" y="208.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <rect x="42" y="212.2" width="23" height="2" rx="1" fill="#151A21"/>
+      <circle class="led-a" cx="76" cy="209" r="1.8" fill="#454F5C"/>
+      <circle class="led-b" cx="83" cy="209" r="1.8" fill="#454F5C"/>
+      <circle cx="91" cy="209" r="1.1" fill="#454F5C"/>
+      <title>Server 7 — online</title>
+    </g>
+    <path class="hero-traffic is-on" data-traffic="0" d="M 84 53 H 101.5 V 23 H 96" filter="url(#heroGlow)"/>
+    <path class="hero-traffic is-on" data-traffic="1" d="M 84 79 H 101.5 V 23 H 96" filter="url(#heroGlow)"/>
+    <path class="hero-traffic" data-traffic="2" d="M 84 105 H 101.5 V 23 H 96" filter="url(#heroGlow)"/>
+    <path class="hero-traffic is-on" data-traffic="3" d="M 84 131 H 101.5 V 23 H 96" filter="url(#heroGlow)"/>
+    <path class="hero-traffic" data-traffic="4" d="M 84 157 H 101.5 V 23 H 96" filter="url(#heroGlow)"/>
+    <path class="hero-traffic" data-traffic="5" d="M 84 183 H 101.5 V 23 H 96" filter="url(#heroGlow)"/>
+    <path class="hero-traffic is-on" data-traffic="6" d="M 84 209 H 101.5 V 23 H 96" filter="url(#heroGlow)"/>
+    <g aria-hidden="true">
+      <rect x="4" y="230" width="96" height="9" rx="1" fill="#1B2128" stroke="#2C3540" stroke-width=".5"/>
+      <line x1="8" y1="234" x2="96" y2="234" stroke="#2C3540" stroke-width=".5"/>
+      <line x1="8" y1="237" x2="96" y2="237" stroke="#2C3540" stroke-width=".5"/>
+      <rect x="4" y="243" width="96" height="9" rx="1" fill="#1B2128" stroke="#2C3540" stroke-width=".5"/>
+      <line x1="8" y1="247" x2="96" y2="247" stroke="#2C3540" stroke-width=".5"/>
+      <line x1="8" y1="250" x2="96" y2="250" stroke="#2C3540" stroke-width=".5"/>
+    </g>
   </g>
 <g transform="matrix(0.8660 0.5000 0.0000 1.0000 -409.54 -497.55)"><rect width="104" height="2" rx="1" fill="#FF9A2E" opacity=".8"/></g>
 <g transform="matrix(0.8660 0.5000 0.0000 1.0000 -406.25 -487.45)"><text font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="5.5" letter-spacing="1" fill="#7C8A99">RACK-01</text></g>
@@ -135,89 +246,66 @@
 <polygon points="-349.87,-136.6 96.99,121.4 93.53,123.4 -353.34,-134.6" fill="#F8F3EB" opacity=".85"/>
 <line x1="-352.47" y1="-135.3" x2="94.4" y2="122.7" stroke="#FF9A2E" stroke-width="1.2" opacity=".28"/>
 <g transform="matrix(0.8660 0.5000 -0.8660 0.5000 -147.22 -127.90)"><rect width="326" height="112" rx="8" fill="#D8D0C4" stroke="#C8BFB1" stroke-width="1.2"/></g>
-<path d="M -173.21,-111.2 C -174.94,-160.2 -88.33,-180.2 -25.98,-170.2" fill="none" stroke="#FF9A2E" stroke-width="1.5" opacity=".55"/>
-<path d="M 51.96,34.8 C 128.17,28.8 173.21,-17.2 161.08,-62.2" fill="none" stroke="#596675" stroke-width="1.4" opacity=".7"/>
+<path d="M -173.21,-111.2 C -174.94,-160.2 -62.33,-190.2 55,-150" fill="none" stroke="#FF9A2E" stroke-width="1.5" opacity=".55"/>
+<path d="M 51.96,34.8 C 80.17,20.8 96.21,-84.2 64.08,-132.2" fill="none" stroke="#596675" stroke-width="1.4" opacity=".7"/>
+<g transform="translate(54.56 31.5)">
 <polygon points="42.44,-183.5 4.33,-161.5 4.33,-167.5 42.44,-189.5" fill="#222831" /><polygon points="-40.7,-187.5 4.33,-161.5 4.33,-167.5 -40.7,-193.5" fill="#2B323C" /><polygon points="-2.6,-215.5 42.44,-189.5 4.33,-167.5 -40.7,-193.5" fill="#3B434E" />
 <polygon points="13.86,-190 -1.73,-181 -1.73,-245 13.86,-254" fill="#222831" /><polygon points="-17.32,-190 -1.73,-181 -1.73,-245 -17.32,-254" fill="#2B323C" /><polygon points="-1.73,-263 13.86,-254 -1.73,-245 -17.32,-254" fill="#3B434E" />
-<polygon points="232.96,-73.5 194.86,-51.5 194.86,-57.5 232.96,-79.5" fill="#222831" /><polygon points="149.82,-77.5 194.86,-51.5 194.86,-57.5 149.82,-83.5" fill="#2B323C" /><polygon points="187.93,-105.5 232.96,-79.5 194.86,-57.5 149.82,-83.5" fill="#3B434E" />
-<polygon points="204.38,-80 188.79,-71 188.79,-135 204.38,-144" fill="#222831" /><polygon points="173.21,-80 188.79,-71 188.79,-135 173.21,-144" fill="#2B323C" /><polygon points="188.79,-153 204.38,-144 188.79,-135 173.21,-144" fill="#3B434E" />
-<polygon points="114.32,-216 77.94,-195 77.94,-345 114.32,-366" fill="#222831" /><polygon points="-103.92,-300 77.94,-195 77.94,-345 -103.92,-450" fill="#2B323C" /><polygon points="-67.55,-471 114.32,-366 77.94,-345 -103.92,-450" fill="#3B434E" />
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -95.52 -434.85)"><rect width="190" height="130" rx="4" fill="#1B212A" stroke="#151A21" stroke-width="1.2"/></g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -88.85 -422.70)">
-    <rect width="174" height="114" rx="3" fill="#11161D" stroke="#26303B" stroke-width="1"/>
-    <rect width="174" height="16" fill="#1B212A"/>
+</g>
+<polygon points="223.43,-153 187.06,-132 187.06,-282 223.43,-303" fill="#222831" /><polygon points="-103.92,-300 187.06,-132 187.06,-282 -103.92,-450" fill="#2B323C" /><polygon points="-67.55,-471 223.43,-303 187.06,-282 -103.92,-450" fill="#3B434E" />
+<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -95.52 -434.85)"><rect width="316" height="130" rx="4" fill="#1B212A" stroke="#151A21" stroke-width="1.2"/></g>
+<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -88.85 -422.70)" data-hero-power="true" role="button" tabindex="0" aria-label="Wide monitor. Click or press enter to toggle the desk computer." aria-pressed="true">
+    <rect width="300" height="114" rx="3" fill="#11161D" stroke="#26303B" stroke-width="1"/>
+    <rect width="300" height="16" fill="#1B212A"/>
     <circle cx="9" cy="8" r="2.2" fill="#596675"/>
     <circle cx="16" cy="8" r="2.2" fill="#596675"/>
     <circle cx="23" cy="8" r="2.2" fill="#FF9A2E"/>
-    <line x1="32" y1="8" x2="166" y2="8" stroke="#2C3641" stroke-width="1"/>
-  
-<rect x="0" y="16" width="22" height="98" fill="#0D1218"/>
-<text x="14" y="27" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7" fill="#596675">1</text>
-<text x="28" y="27" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.8" fill="#B49AD6">const desk = {</text>
-<text x="14" y="36.4" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7" fill="#596675">2</text>
-<text x="28" y="36.4" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.8" fill="#C9D3DE">  monitors: 2,</text>
-<text x="14" y="45.8" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7" fill="#596675">3</text>
-<text x="28" y="45.8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.8" fill="#C9D3DE">  coffee: true,</text>
-<text x="14" y="55.2" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7" fill="#596675">4</text>
-<text x="28" y="55.2" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.8" fill="#C9D3DE">  duck: &#39;rubber&#39;,</text>
-<text x="14" y="64.6" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7" fill="#596675">5</text>
-<text x="28" y="64.6" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.8" fill="#7FA6C9">  focus: &#39;ship&#39;,</text>
-<text x="14" y="74" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7" fill="#596675">6</text>
-<text x="28" y="74" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.8" fill="#B49AD6">};</text>
-<text x="14" y="83.4" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7" fill="#596675">7</text>
-<text x="14" y="92.8" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7" fill="#596675">8</text>
-<rect x="26" y="85.3" width="142" height="9.5" rx="2" fill="#FF9A2E" opacity=".13"/>
-<text x="28" y="92.8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.8" fill="#FF9A2E">await build(desk);</text>
-<text x="14" y="102.2" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7" fill="#596675">9</text>
-<text x="28" y="102.2" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.8" fill="#596675">// ship it</text>
-<text x="14" y="111.60000000000001" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7" fill="#596675">10</text>
-<text x="28" y="111.60000000000001" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.8" fill="#596675">// repeat</text>
-<rect x="110" y="85.8" width="4.5" height="8.5" fill="#FF9A2E" opacity=".9"/>
-<circle cx="-18" cy="-208.64999999999998" r="0" fill="none"/>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 54.73 -217.60)"><circle cx="0" cy="0" r="2" fill="#FF9A2E"/></g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 -94.22 -303.60)"><rect width="26" height="2" rx="1" fill="#596675" opacity=".55"/></g>
-</g>
-<polygon points="304.84,-106 268.47,-85 268.47,-235 304.84,-256" fill="#222831" /><polygon points="86.6,-190 268.47,-85 268.47,-235 86.6,-340" fill="#2B323C" /><polygon points="122.98,-361 304.84,-256 268.47,-235 86.6,-340" fill="#3B434E" />
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 95.00 -324.85)"><rect width="190" height="130" rx="4" fill="#1B212A" stroke="#151A21" stroke-width="1.2"/></g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 101.67 -312.70)">
-    <rect width="174" height="114" rx="3" fill="#11161D" stroke="#26303B" stroke-width="1"/>
-    <rect width="174" height="16" fill="#1B212A"/>
-    <circle cx="9" cy="8" r="2.2" fill="#596675"/>
-    <circle cx="16" cy="8" r="2.2" fill="#596675"/>
-    <circle cx="23" cy="8" r="2.2" fill="#FF9A2E"/>
-    <line x1="32" y1="8" x2="166" y2="8" stroke="#2C3641" stroke-width="1"/>
-  
-<text x="10" y="30" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="6.5" letter-spacing="1.2" fill="#7C8A99">zsh — 80×24</text>
-<text x="164" y="30" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="6.2" fill="#596675">siddhesh@desk</text>
-<text x="10" y="38" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.2" fill="#FF9A2E">> ls</text>
-<text x="10" y="47" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.2" fill="#C9D3DE">projects  resume  dotfiles</text>
-<text x="10" y="58" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.2" fill="#FF9A2E">> git status</text>
-<text x="10" y="67" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.2" fill="#7C8A99">On branch main</text>
-<text x="10" y="76" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.2" fill="#7FB69B">nothing to commit, working tree clean</text>
-<text x="10" y="88" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.2" fill="#FF9A2E">> pnpm dev</text>
-<text x="10" y="97" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.2" fill="#7C8A99">VITE v7.3.5  ready in 412 ms</text>
-<text x="10" y="106" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7.2" fill="#FFB25E">Local: http://localhost:5173/</text>
-<rect x="10" y="110" width="5" height="9" fill="#FF9A2E" opacity=".9"/>
-<circle cx="202" cy="-98.65" r="0" fill="none"/>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 245.26 -107.60)"><circle cx="0" cy="0" r="2" fill="#FF9A2E"/></g>
-<g transform="matrix(0.8660 0.5000 0.0000 1.0000 96.30 -193.60)"><rect width="26" height="2" rx="1" fill="#596675" opacity=".55"/></g>
-</g>
-<polygon points="303.97,2.7 296.68,6.06 288.28,8.39 279.19,9.59 269.87,9.59 260.78,8.39 252.38,6.06 245.09,2.7 239.27,-1.51 235.23,-6.36 233.15,-11.61 233.15,-16.99 235.23,-22.24 239.27,-27.09 245.09,-31.3 252.38,-34.66 260.78,-36.99 269.87,-38.19 279.19,-38.19 288.28,-36.99 296.68,-34.66 303.97,-31.3 309.79,-27.09 313.83,-22.24 315.91,-16.99 315.91,-11.61 313.83,-6.36 309.79,-1.51" fill="#2A3038" opacity=".12" filter="url(#softSm)"/>
-<polygon points="240.24,-55.5 240.9,-59.36 242.85,-63.08 246.02,-66.5 250.28,-69.5 255.48,-71.96 261.41,-73.79 267.84,-74.92 274.53,-75.3 281.22,-74.92 287.65,-73.79 293.58,-71.96 298.78,-69.5 303.04,-66.5 306.21,-63.08 308.16,-59.36 308.82,-55.5 308.16,-51.64 299.76,-10.6 298.29,-7.82 295.92,-5.25 292.72,-3 288.82,-1.15 284.37,0.22 279.55,1.06 274.53,1.35 269.51,1.06 264.69,0.22 260.24,-1.15 256.34,-3 253.14,-5.25 250.77,-7.82 249.3,-10.6 240.9,-51.64" fill="#B58F73" /><polygon points="298.78,-41.5 293.58,-39.04 287.65,-37.21 281.22,-36.08 274.53,-35.7 267.84,-36.08 261.41,-37.21 255.48,-39.04 250.28,-41.5 246.02,-44.5 242.85,-47.92 240.9,-51.64 240.24,-55.5 240.9,-59.36 242.85,-63.08 246.02,-66.5 250.28,-69.5 255.48,-71.96 261.41,-73.79 267.84,-74.92 274.53,-75.3 281.22,-74.92 287.65,-73.79 293.58,-71.96 298.78,-69.5 303.04,-66.5 306.21,-63.08 308.16,-59.36 308.82,-55.5 308.16,-51.64 306.21,-47.92 303.04,-44.5" fill="#D8B79C" />
-<polygon points="237.79,-62.5 238.49,-66.64 240.58,-70.62 243.98,-74.29 248.55,-77.5 254.12,-80.14 260.47,-82.1 267.36,-83.31 274.53,-83.71 281.7,-83.31 288.59,-82.1 294.94,-80.14 300.51,-77.5 305.08,-74.29 308.48,-70.62 310.57,-66.64 311.27,-62.5 311.27,-55.5 310.57,-51.36 308.48,-47.38 305.08,-43.71 300.51,-40.5 294.94,-37.86 288.59,-35.9 281.7,-34.69 274.53,-34.29 267.36,-34.69 260.47,-35.9 254.12,-37.86 248.55,-40.5 243.98,-43.71 240.58,-47.38 238.49,-51.36 237.79,-55.5" fill="#B58F73" /><polygon points="300.51,-47.5 294.94,-44.86 288.59,-42.9 281.7,-41.69 274.53,-41.29 267.36,-41.69 260.47,-42.9 254.12,-44.86 248.55,-47.5 243.98,-50.71 240.58,-54.38 238.49,-58.36 237.79,-62.5 238.49,-66.64 240.58,-70.62 243.98,-74.29 248.55,-77.5 254.12,-80.14 260.47,-82.1 267.36,-83.31 274.53,-83.71 281.7,-83.31 288.59,-82.1 294.94,-80.14 300.51,-77.5 305.08,-74.29 308.48,-70.62 310.57,-66.64 311.27,-62.5 310.57,-58.36 308.48,-54.38 305.08,-50.71" fill="#D8B79C" />
-<polygon points="241.46,-64.5 242.1,-68.22 243.98,-71.81 247.03,-75.11 251.15,-78 256.16,-80.37 261.88,-82.14 268.08,-83.23 274.53,-83.59 280.98,-83.23 287.18,-82.14 292.9,-80.37 297.91,-78 302.03,-75.11 305.08,-71.81 306.96,-68.22 307.6,-64.5 307.6,-62.5 306.96,-58.78 305.08,-55.19 302.03,-51.89 297.91,-49 292.9,-46.63 287.18,-44.86 280.98,-43.77 274.53,-43.41 268.08,-43.77 261.88,-44.86 256.16,-46.63 251.15,-49 247.03,-51.89 243.98,-55.19 242.1,-58.78 241.46,-62.5" fill="#5A3B2E" /><polygon points="297.91,-51 292.9,-48.63 287.18,-46.86 280.98,-45.77 274.53,-45.41 268.08,-45.77 261.88,-46.86 256.16,-48.63 251.15,-51 247.03,-53.89 243.98,-57.19 242.1,-60.78 241.46,-64.5 242.1,-68.22 243.98,-71.81 247.03,-75.11 251.15,-78 256.16,-80.37 261.88,-82.14 268.08,-83.23 274.53,-83.59 280.98,-83.23 287.18,-82.14 292.9,-80.37 297.91,-78 302.03,-75.11 305.08,-71.81 306.96,-68.22 307.6,-64.5 306.96,-60.78 305.08,-57.19 302.03,-53.89" fill="#5A3B2E" />
-<path d="M 274.53 -64.5 Q 264.53 -98.5 246.53 -126.5" fill="none" stroke="#6B8F76" stroke-width="2" stroke-linecap="round"/>
-<path d="M 274.53 -64.5 Q 282.53 -104.5 284.53 -140.5" fill="none" stroke="#6B8F76" stroke-width="2" stroke-linecap="round"/>
-<path d="M 274.53 -64.5 Q 300.53 -92.5 326.53 -112.5" fill="none" stroke="#6B8F76" stroke-width="2" stroke-linecap="round"/>
-<path d="M 274.53 -64.5 C 231.53 -146.5 265.53 -146.5 248.53 -124.5 C 256.18 -131.1 240.88 -131.1 274.53 -64.5 Z" fill="#7FA58A" transform="rotate(-18 248.53 -124.5)"/>
-<path d="M 274.53 -64.5 C 269.53 -162.5 299.53 -162.5 284.53 -138.5 C 291.28 -145.7 277.78 -145.7 274.53 -64.5 Z" fill="#94B59D" transform="rotate(4 284.53 -138.5)"/>
-<path d="M 274.53 -64.5 C 307.53 -129.5 337.53 -129.5 322.53 -110.5 C 329.28 -116.2 315.78 -116.2 274.53 -64.5 Z" fill="#6B8F76" transform="rotate(28 322.53 -110.5)"/>
-<path d="M 274.53 -64.5 C 211.53 -111.5 237.53 -111.5 224.53 -94.5 C 230.38 -99.6 218.68 -99.6 274.53 -64.5 Z" fill="#6B8F76" transform="rotate(-42 224.53 -94.5)"/>
-<path d="M 274.53 -64.5 C 290.53 -110.5 318.53 -110.5 304.53 -92.5 C 310.83 -97.9 298.23 -97.9 274.53 -64.5 Z" fill="#7FA58A" transform="rotate(38 304.53 -92.5)"/>
-<path d="M 274.53 -64.5 C 254.53 -118.5 278.53 -118.5 266.53 -102.5 C 271.93 -107.3 261.13 -107.3 274.53 -64.5 Z" fill="#94B59D" transform="rotate(0 266.53 -102.5)"/>
-<path d="M 274.53 -64.5 C 224.53 -128.5 248.53 -128.5 236.53 -110.5 C 241.93 -115.9 231.13 -115.9 274.53 -64.5 Z" fill="#94B59D" transform="rotate(-28 236.53 -110.5)"/>
-<path d="M 274.53 -64.5 C 283.53 -136.5 309.53 -136.5 296.53 -116.5 C 302.38 -122.5 290.68 -122.5 274.53 -64.5 Z" fill="#6B8F76" transform="rotate(18 296.53 -116.5)"/>
-<path d="M 274.53 -64.5 C 320.53 -102.5 344.53 -102.5 332.53 -86.5 C 337.93 -91.3 327.13 -91.3 274.53 -64.5 Z" fill="#7FA58A" transform="rotate(40 332.53 -86.5)"/>
+    <line x1="32" y1="8" x2="292" y2="8" stroke="#2C3641" stroke-width="1"/>
+    <text x="36" y="10.8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="4.6" letter-spacing=".7" fill="#596675">desk.ts — single-wide</text>
+    <rect x="0" y="16" width="154" height="98" fill="#0D1218"/>
+    <line x1="154" y1="16" x2="154" y2="114" stroke="#1B212A" stroke-width="1"/>
+    <g class="hero-screen-content" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+      <text x="14" y="27" text-anchor="end" font-size="7" fill="#596675">1</text>
+      <text x="28" y="27" font-size="7.8" fill="#B49AD6">const desk = {</text>
+      <text x="14" y="36.4" text-anchor="end" font-size="7" fill="#596675">2</text>
+      <text x="28" y="36.4" font-size="7.8" fill="#C9D3DE">  monitors: 1,</text>
+      <text x="14" y="45.8" text-anchor="end" font-size="7" fill="#596675">3</text>
+      <text x="28" y="45.8" font-size="7.8" fill="#C9D3DE">  plant: null,</text>
+      <text x="14" y="55.2" text-anchor="end" font-size="7" fill="#596675">4</text>
+      <text x="28" y="55.2" font-size="7.8" fill="#C9D3DE">  coffee: true,</text>
+      <text x="14" y="64.6" text-anchor="end" font-size="7" fill="#596675">5</text>
+      <text x="28" y="64.6" font-size="7.8" fill="#7FA6C9">  duck: &#39;rubber&#39;,</text>
+      <text x="14" y="74" text-anchor="end" font-size="7" fill="#596675">6</text>
+      <text x="28" y="74" font-size="7.8" fill="#B49AD6">};</text>
+      <text x="14" y="83.4" text-anchor="end" font-size="7" fill="#596675">7</text>
+      <text x="14" y="92.8" text-anchor="end" font-size="7" fill="#596675">8</text>
+      <rect x="26" y="85.3" width="120" height="9.5" rx="2" fill="#FF9A2E" opacity=".13"/>
+      <text x="28" y="92.8" font-size="7.8" fill="#FF9A2E">await build(desk);</text>
+      <text x="14" y="102.2" text-anchor="end" font-size="7" fill="#596675">9</text>
+      <text x="28" y="102.2" font-size="7.8" fill="#596675">// ship it</text>
+    </g>
+    <g class="hero-screen-content" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">
+      <text x="164" y="30" font-size="6.2" letter-spacing="1" fill="#7C8A99">rack live</text>
+      <text x="164" y="44" font-size="5.2" letter-spacing=".7" fill="#7C8A99">POWER <tspan id="hero-power-value" font-size="8.4" fill="#FF9A2E">448 W</tspan></text>
+      <text x="164" y="56" font-size="5.2" letter-spacing=".7" fill="#7C8A99">TEMP  <tspan id="hero-temp-value" font-size="8.4" fill="#FF9A2E">42 C</tspan></text>
+      <text x="164" y="68" font-size="5.2" letter-spacing=".7" fill="#7C8A99">SERVERS <tspan id="hero-server-count" font-size="6.2" fill="#C9D3DE">4 / 7 up</tspan></text>
+      <line x1="164" y1="74" x2="292" y2="74" stroke="#26303B" stroke-width=".8"/>
+      <text x="164" y="86" font-size="5.8" fill="#596675">keyboard · lights only</text>
+      <text x="164" y="97" font-size="5.8" fill="#596675">1–7 servers · click power</text>
+      <text x="164" y="109" font-size="4.6" fill="#7FB69B">rack link · active</text>
+    </g>
+  <rect class="hero-sleep-overlay" width="300" height="114" rx="3" fill="#0B0F14" opacity="0"/>
+  <g class="hero-standby" opacity="0">
+    <text x="150" y="62" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="7" letter-spacing="1.4" fill="#596675">standby</text>
+    <circle cx="150" cy="73" r="2" fill="none" stroke="#454F5C" stroke-width="1"/>
+    <line x1="150" y1="70.5" x2="150" y2="73" stroke="#454F5C" stroke-width="1"/>
+  </g>
+  <circle class="hero-power-led" cx="292" cy="8" r="1.8" fill="#FF9A2E"/>
+  <rect class="hero-focus-ring" x="-8" y="-8" width="316" height="130" rx="5" fill="none" stroke="#FF9A2E" stroke-width="1.4" opacity="0"/>
+  <rect class="hero-power-hit" x="-8" y="-8" width="316" height="130" fill="transparent" pointer-events="all"/>
+  </g>
+
+<g id="hero-mug" transform="translate(390 185)">
 <polygon points="-183.6,-124.8 -190.19,-121.88 -197.87,-120.04 -206.11,-119.42 -214.36,-120.04 -222.04,-121.88 -228.63,-124.8 -233.69,-128.61 -236.87,-133.04 -237.96,-137.8 -236.87,-142.56 -233.69,-146.99 -228.63,-150.8 -222.04,-153.72 -214.36,-155.56 -206.11,-156.18 -197.87,-155.56 -190.19,-153.72 -183.6,-150.8 -178.54,-146.99 -175.36,-142.56 -174.27,-137.8 -175.36,-133.04 -178.54,-128.61" fill="#2A3038" opacity=".12" filter="url(#softSm)"/>
 <path d="M -188.11 -204 C -150.11 -215 -150.11 -165 -188.11 -171" fill="none" stroke="#DDD6CA" stroke-width="9" stroke-linecap="round"/>
 <path d="M -188.11 -204 C -150.11 -215 -150.11 -165 -188.11 -171" fill="none" stroke="#F4F0E8" stroke-width="5" stroke-linecap="round" opacity=".8"/>
@@ -226,54 +314,403 @@
 <polygon points="-236.73,-191 -236.14,-194.45 -234.4,-197.76 -231.57,-200.82 -227.76,-203.5 -223.12,-205.7 -217.83,-207.33 -212.09,-208.34 -206.11,-208.68 -200.14,-208.34 -194.4,-207.33 -189.1,-205.7 -184.46,-203.5 -180.66,-200.82 -177.83,-197.76 -176.08,-194.45 -175.5,-191 -175.5,-189 -176.08,-185.55 -177.83,-182.24 -180.66,-179.18 -184.46,-176.5 -189.1,-174.3 -194.4,-172.67 -200.14,-171.66 -206.11,-171.32 -212.09,-171.66 -217.83,-172.67 -223.12,-174.3 -227.76,-176.5 -231.57,-179.18 -234.4,-182.24 -236.14,-185.55 -236.73,-189" fill="#C7BFB1" /><polygon points="-184.46,-178.5 -189.1,-176.3 -194.4,-174.67 -200.14,-173.66 -206.11,-173.32 -212.09,-173.66 -217.83,-174.67 -223.12,-176.3 -227.76,-178.5 -231.57,-181.18 -234.4,-184.24 -236.14,-187.55 -236.73,-191 -236.14,-194.45 -234.4,-197.76 -231.57,-200.82 -227.76,-203.5 -223.12,-205.7 -217.83,-207.33 -212.09,-208.34 -206.11,-208.68 -200.14,-208.34 -194.4,-207.33 -189.1,-205.7 -184.46,-203.5 -180.66,-200.82 -177.83,-197.76 -176.08,-194.45 -175.5,-191 -176.08,-187.55 -177.83,-184.24 -180.66,-181.18" fill="#F4F0E8" />
 <polygon points="-233.06,-192 -232.54,-195.03 -231.01,-197.95 -228.52,-200.64 -225.17,-203 -221.08,-204.93 -216.43,-206.37 -211.37,-207.26 -206.11,-207.56 -200.86,-207.26 -195.8,-206.37 -191.14,-204.93 -187.06,-203 -183.71,-200.64 -181.22,-197.95 -179.69,-195.03 -179.17,-192 -179.17,-191 -179.69,-187.97 -181.22,-185.05 -183.71,-182.36 -187.06,-180 -191.14,-178.07 -195.8,-176.63 -200.86,-175.74 -206.11,-175.44 -211.37,-175.74 -216.43,-176.63 -221.08,-178.07 -225.17,-180 -228.52,-182.36 -231.01,-185.05 -232.54,-187.97 -233.06,-191" fill="#6B4635" /><polygon points="-187.06,-181 -191.14,-179.07 -195.8,-177.63 -200.86,-176.74 -206.11,-176.44 -211.37,-176.74 -216.43,-177.63 -221.08,-179.07 -225.17,-181 -228.52,-183.36 -231.01,-186.05 -232.54,-188.97 -233.06,-192 -232.54,-195.03 -231.01,-197.95 -228.52,-200.64 -225.17,-203 -221.08,-204.93 -216.43,-206.37 -211.37,-207.26 -206.11,-207.56 -200.86,-207.26 -195.8,-206.37 -191.14,-204.93 -187.06,-203 -183.71,-200.64 -181.22,-197.95 -179.69,-195.03 -179.17,-192 -179.69,-188.97 -181.22,-186.05 -183.71,-183.36" fill="#6B4635" />
 <ellipse cx="-210.11" cy="-195" rx="9" ry="4.5" fill="#85573F" opacity=".55" transform="rotate(-18 -210.11 -195)"/>
+</g>
 <polygon points="58.02,1.5 -14.72,43.5 -14.72,35.5 58.02,-6.5" fill="#1E242B" /><polygon points="-213.91,-71.5 -14.72,43.5 -14.72,35.5 -213.91,-79.5" fill="#252B33" /><polygon points="-141.16,-121.5 58.02,-6.5 -14.72,35.5 -213.91,-79.5" fill="#252B33" />
 <g transform="matrix(0.8660 0.5000 -0.8660 0.5000 -140.30 -117.30)"><rect width="220" height="76" rx="3" fill="#242A32"/></g>
-<polygon points="-127.13,-105.8 -139.6,-98.6 -139.6,-102.8 -127.13,-110" fill="#B35F08" /><polygon points="-152.77,-106.2 -139.6,-98.6 -139.6,-102.8 -152.77,-110.4" fill="#E07E12" /><polygon points="-140.3,-117.6 -127.13,-110 -139.6,-102.8 -152.77,-110.4" fill="#FF9A2E" />
-<polygon points="-112.06,-97.1 -124.53,-89.9 -124.53,-94.1 -112.06,-101.3" fill="#1E242B" /><polygon points="-137.7,-97.5 -124.53,-89.9 -124.53,-94.1 -137.7,-101.7" fill="#252B33" /><polygon points="-125.23,-108.9 -112.06,-101.3 -124.53,-94.1 -137.7,-101.7" fill="#3B424C" />
-<polygon points="-96.99,-88.4 -109.47,-81.2 -109.47,-85.4 -96.99,-92.6" fill="#1E242B" /><polygon points="-122.63,-88.8 -109.47,-81.2 -109.47,-85.4 -122.63,-93" fill="#252B33" /><polygon points="-110.16,-100.2 -96.99,-92.6 -109.47,-85.4 -122.63,-93" fill="#3B424C" />
-<polygon points="-81.93,-79.7 -94.4,-72.5 -94.4,-76.7 -81.93,-83.9" fill="#1E242B" /><polygon points="-107.56,-80.1 -94.4,-72.5 -94.4,-76.7 -107.56,-84.3" fill="#252B33" /><polygon points="-95.09,-91.5 -81.93,-83.9 -94.4,-76.7 -107.56,-84.3" fill="#3B424C" />
-<polygon points="-66.86,-71 -79.33,-63.8 -79.33,-68 -66.86,-75.2" fill="#1E242B" /><polygon points="-92.49,-71.4 -79.33,-63.8 -79.33,-68 -92.49,-75.6" fill="#252B33" /><polygon points="-80.02,-82.8 -66.86,-75.2 -79.33,-68 -92.49,-75.6" fill="#3B424C" />
-<polygon points="-51.79,-62.3 -64.26,-55.1 -64.26,-59.3 -51.79,-66.5" fill="#1E242B" /><polygon points="-77.42,-62.7 -64.26,-55.1 -64.26,-59.3 -77.42,-66.9" fill="#252B33" /><polygon points="-64.95,-74.1 -51.79,-66.5 -64.26,-59.3 -77.42,-66.9" fill="#454D58" />
-<polygon points="-36.72,-53.6 -49.19,-46.4 -49.19,-50.6 -36.72,-57.8" fill="#1E242B" /><polygon points="-62.35,-54 -49.19,-46.4 -49.19,-50.6 -62.35,-58.2" fill="#252B33" /><polygon points="-49.88,-65.4 -36.72,-57.8 -49.19,-50.6 -62.35,-58.2" fill="#3B424C" />
-<polygon points="-21.65,-44.9 -34.12,-37.7 -34.12,-41.9 -21.65,-49.1" fill="#1E242B" /><polygon points="-47.28,-45.3 -34.12,-37.7 -34.12,-41.9 -47.28,-49.5" fill="#252B33" /><polygon points="-34.81,-56.7 -21.65,-49.1 -34.12,-41.9 -47.28,-49.5" fill="#3B424C" />
-<polygon points="-6.58,-36.2 -19.05,-29 -19.05,-33.2 -6.58,-40.4" fill="#1E242B" /><polygon points="-32.22,-36.6 -19.05,-29 -19.05,-33.2 -32.22,-40.8" fill="#252B33" /><polygon points="-19.75,-48 -6.58,-40.4 -19.05,-33.2 -32.22,-40.8" fill="#3B424C" />
-<polygon points="8.49,-27.5 -3.98,-20.3 -3.98,-24.5 8.49,-31.7" fill="#1E242B" /><polygon points="-17.15,-27.9 -3.98,-20.3 -3.98,-24.5 -17.15,-32.1" fill="#252B33" /><polygon points="-4.68,-39.3 8.49,-31.7 -3.98,-24.5 -17.15,-32.1" fill="#3B424C" />
-<polygon points="23.56,-18.8 11.09,-11.6 11.09,-15.8 23.56,-23" fill="#1E242B" /><polygon points="-2.08,-19.2 11.09,-11.6 11.09,-15.8 -2.08,-23.4" fill="#252B33" /><polygon points="10.39,-30.6 23.56,-23 11.09,-15.8 -2.08,-23.4" fill="#454D58" />
-<polygon points="38.62,-10.1 26.15,-2.9 26.15,-7.1 38.62,-14.3" fill="#1E242B" /><polygon points="12.99,-10.5 26.15,-2.9 26.15,-7.1 12.99,-14.7" fill="#252B33" /><polygon points="25.46,-21.9 38.62,-14.3 26.15,-7.1 12.99,-14.7" fill="#3B424C" />
-<polygon points="-142.03,-97.2 -154.5,-90 -154.5,-94.2 -142.03,-101.4" fill="#1E242B" /><polygon points="-167.66,-97.6 -154.5,-90 -154.5,-94.2 -167.66,-101.8" fill="#252B33" /><polygon points="-155.19,-109 -142.03,-101.4 -154.5,-94.2 -167.66,-101.8" fill="#3B424C" />
-<polygon points="-126.96,-88.5 -139.43,-81.3 -139.43,-85.5 -126.96,-92.7" fill="#1E242B" /><polygon points="-152.59,-88.9 -139.43,-81.3 -139.43,-85.5 -152.59,-93.1" fill="#252B33" /><polygon points="-140.12,-100.3 -126.96,-92.7 -139.43,-85.5 -152.59,-93.1" fill="#3B424C" />
-<polygon points="-111.89,-79.8 -124.36,-72.6 -124.36,-76.8 -111.89,-84" fill="#1E242B" /><polygon points="-137.52,-80.2 -124.36,-72.6 -124.36,-76.8 -137.52,-84.4" fill="#252B33" /><polygon points="-125.05,-91.6 -111.89,-84 -124.36,-76.8 -137.52,-84.4" fill="#3B424C" />
-<polygon points="-96.82,-71.1 -109.29,-63.9 -109.29,-68.1 -96.82,-75.3" fill="#1E242B" /><polygon points="-122.46,-71.5 -109.29,-63.9 -109.29,-68.1 -122.46,-75.7" fill="#252B33" /><polygon points="-109.99,-82.9 -96.82,-75.3 -109.29,-68.1 -122.46,-75.7" fill="#3B424C" />
-<polygon points="-81.75,-62.4 -94.22,-55.2 -94.22,-59.4 -81.75,-66.6" fill="#1E242B" /><polygon points="-107.39,-62.8 -94.22,-55.2 -94.22,-59.4 -107.39,-67" fill="#252B33" /><polygon points="-94.92,-74.2 -81.75,-66.6 -94.22,-59.4 -107.39,-67" fill="#454D58" />
-<polygon points="-66.68,-53.7 -79.15,-46.5 -79.15,-50.7 -66.68,-57.9" fill="#1E242B" /><polygon points="-92.32,-54.1 -79.15,-46.5 -79.15,-50.7 -92.32,-58.3" fill="#252B33" /><polygon points="-79.85,-65.5 -66.68,-57.9 -79.15,-50.7 -92.32,-58.3" fill="#3B424C" />
-<polygon points="-51.62,-45 -64.09,-37.8 -64.09,-42 -51.62,-49.2" fill="#1E242B" /><polygon points="-77.25,-45.4 -64.09,-37.8 -64.09,-42 -77.25,-49.6" fill="#252B33" /><polygon points="-64.78,-56.8 -51.62,-49.2 -64.09,-42 -77.25,-49.6" fill="#3B424C" />
-<polygon points="-36.55,-36.3 -49.02,-29.1 -49.02,-33.3 -36.55,-40.5" fill="#1E242B" /><polygon points="-62.18,-36.7 -49.02,-29.1 -49.02,-33.3 -62.18,-40.9" fill="#252B33" /><polygon points="-49.71,-48.1 -36.55,-40.5 -49.02,-33.3 -62.18,-40.9" fill="#3B424C" />
-<polygon points="-21.48,-27.6 -33.95,-20.4 -33.95,-24.6 -21.48,-31.8" fill="#1E242B" /><polygon points="-47.11,-28 -33.95,-20.4 -33.95,-24.6 -47.11,-32.2" fill="#252B33" /><polygon points="-34.64,-39.4 -21.48,-31.8 -33.95,-24.6 -47.11,-32.2" fill="#3B424C" />
-<polygon points="-6.41,-18.9 -18.88,-11.7 -18.88,-15.9 -6.41,-23.1" fill="#1E242B" /><polygon points="-32.04,-19.3 -18.88,-11.7 -18.88,-15.9 -32.04,-23.5" fill="#252B33" /><polygon points="-19.57,-30.7 -6.41,-23.1 -18.88,-15.9 -32.04,-23.5" fill="#454D58" />
-<polygon points="8.66,-10.2 -3.81,-3 -3.81,-7.2 8.66,-14.4" fill="#1E242B" /><polygon points="-16.97,-10.6 -3.81,-3 -3.81,-7.2 -16.97,-14.8" fill="#252B33" /><polygon points="-4.5,-22 8.66,-14.4 -3.81,-7.2 -16.97,-14.8" fill="#3B424C" />
-<polygon points="23.73,-1.5 11.26,5.7 11.26,1.5 23.73,-5.7" fill="#1E242B" /><polygon points="-1.91,-1.9 11.26,5.7 11.26,1.5 -1.91,-6.1" fill="#252B33" /><polygon points="10.57,-13.3 23.73,-5.7 11.26,1.5 -1.91,-6.1" fill="#3B424C" />
-<polygon points="-156.92,-88.6 -169.39,-81.4 -169.39,-85.6 -156.92,-92.8" fill="#1E242B" /><polygon points="-182.56,-89 -169.39,-81.4 -169.39,-85.6 -182.56,-93.2" fill="#252B33" /><polygon points="-170.09,-100.4 -156.92,-92.8 -169.39,-85.6 -182.56,-93.2" fill="#3B424C" />
-<polygon points="-141.85,-79.9 -154.33,-72.7 -154.33,-76.9 -141.85,-84.1" fill="#1E242B" /><polygon points="-167.49,-80.3 -154.33,-72.7 -154.33,-76.9 -167.49,-84.5" fill="#252B33" /><polygon points="-155.02,-91.7 -141.85,-84.1 -154.33,-76.9 -167.49,-84.5" fill="#3B424C" />
-<polygon points="-126.79,-71.2 -139.26,-64 -139.26,-68.2 -126.79,-75.4" fill="#1E242B" /><polygon points="-152.42,-71.6 -139.26,-64 -139.26,-68.2 -152.42,-75.8" fill="#252B33" /><polygon points="-139.95,-83 -126.79,-75.4 -139.26,-68.2 -152.42,-75.8" fill="#3B424C" />
-<polygon points="-111.72,-62.5 -124.19,-55.3 -124.19,-59.5 -111.72,-66.7" fill="#1E242B" /><polygon points="-137.35,-62.9 -124.19,-55.3 -124.19,-59.5 -137.35,-67.1" fill="#252B33" /><polygon points="-124.88,-74.3 -111.72,-66.7 -124.19,-59.5 -137.35,-67.1" fill="#454D58" />
-<polygon points="-96.65,-53.8 -109.12,-46.6 -109.12,-50.8 -96.65,-58" fill="#1E242B" /><polygon points="-122.28,-54.2 -109.12,-46.6 -109.12,-50.8 -122.28,-58.4" fill="#252B33" /><polygon points="-109.81,-65.6 -96.65,-58 -109.12,-50.8 -122.28,-58.4" fill="#3B424C" />
-<polygon points="-81.58,-45.1 -94.05,-37.9 -94.05,-42.1 -81.58,-49.3" fill="#1E242B" /><polygon points="-107.21,-45.5 -94.05,-37.9 -94.05,-42.1 -107.21,-49.7" fill="#252B33" /><polygon points="-94.74,-56.9 -81.58,-49.3 -94.05,-42.1 -107.21,-49.7" fill="#3B424C" />
-<polygon points="-66.51,-36.4 -78.98,-29.2 -78.98,-33.4 -66.51,-40.6" fill="#1E242B" /><polygon points="-92.15,-36.8 -78.98,-29.2 -78.98,-33.4 -92.15,-41" fill="#252B33" /><polygon points="-79.67,-48.2 -66.51,-40.6 -78.98,-33.4 -92.15,-41" fill="#3B424C" />
-<polygon points="-51.44,-27.7 -63.91,-20.5 -63.91,-24.7 -51.44,-31.9" fill="#1E242B" /><polygon points="-77.08,-28.1 -63.91,-20.5 -63.91,-24.7 -77.08,-32.3" fill="#252B33" /><polygon points="-64.61,-39.5 -51.44,-31.9 -63.91,-24.7 -77.08,-32.3" fill="#3B424C" />
-<polygon points="-36.37,-19 -48.84,-11.8 -48.84,-16 -36.37,-23.2" fill="#1E242B" /><polygon points="-62.01,-19.4 -48.84,-11.8 -48.84,-16 -62.01,-23.6" fill="#252B33" /><polygon points="-49.54,-30.8 -36.37,-23.2 -48.84,-16 -62.01,-23.6" fill="#454D58" />
-<polygon points="-21.3,-10.3 -33.77,-3.1 -33.77,-7.3 -21.3,-14.5" fill="#1E242B" /><polygon points="-46.94,-10.7 -33.77,-3.1 -33.77,-7.3 -46.94,-14.9" fill="#252B33" /><polygon points="-34.47,-22.1 -21.3,-14.5 -33.77,-7.3 -46.94,-14.9" fill="#3B424C" />
-<polygon points="-6.24,-1.6 -18.71,5.6 -18.71,1.4 -6.24,-5.8" fill="#1E242B" /><polygon points="-31.87,-2 -18.71,5.6 -18.71,1.4 -31.87,-6.2" fill="#252B33" /><polygon points="-19.4,-13.4 -6.24,-5.8 -18.71,1.4 -31.87,-6.2" fill="#3B424C" />
-<polygon points="8.83,7.1 -3.64,14.3 -3.64,10.1 8.83,2.9" fill="#1E242B" /><polygon points="-16.8,6.7 -3.64,14.3 -3.64,10.1 -16.8,2.5" fill="#252B33" /><polygon points="-4.33,-4.7 8.83,2.9 -3.64,10.1 -16.8,2.5" fill="#3B424C" />
-<polygon points="-171.82,-80 -184.29,-72.8 -184.29,-77 -171.82,-84.2" fill="#1E242B" /><polygon points="-197.45,-80.4 -184.29,-72.8 -184.29,-77 -197.45,-84.6" fill="#252B33" /><polygon points="-184.98,-91.8 -171.82,-84.2 -184.29,-77 -197.45,-84.6" fill="#3B424C" />
-<polygon points="-156.75,-71.3 -169.22,-64.1 -169.22,-68.3 -156.75,-75.5" fill="#1E242B" /><polygon points="-182.38,-71.7 -169.22,-64.1 -169.22,-68.3 -182.38,-75.9" fill="#252B33" /><polygon points="-169.91,-83.1 -156.75,-75.5 -169.22,-68.3 -182.38,-75.9" fill="#3B424C" />
-<polygon points="-141.68,-62.6 -154.15,-55.4 -154.15,-59.6 -141.68,-66.8" fill="#1E242B" /><polygon points="-167.32,-63 -154.15,-55.4 -154.15,-59.6 -167.32,-67.2" fill="#252B33" /><polygon points="-154.85,-74.4 -141.68,-66.8 -154.15,-59.6 -167.32,-67.2" fill="#454D58" />
-<polygon points="-126.61,-53.9 -139.08,-46.7 -139.08,-50.9 -126.61,-58.1" fill="#1E242B" /><polygon points="-152.25,-54.3 -139.08,-46.7 -139.08,-50.9 -152.25,-58.5" fill="#252B33" /><polygon points="-139.78,-65.7 -126.61,-58.1 -139.08,-50.9 -152.25,-58.5" fill="#3B424C" />
-<polygon points="-51.27,-10.4 -63.74,-3.2 -63.74,-7.4 -51.27,-14.6" fill="#1E242B" /><polygon points="-76.9,-10.8 -63.74,-3.2 -63.74,-7.4 -76.9,-15" fill="#252B33" /><polygon points="-64.43,-22.2 -51.27,-14.6 -63.74,-7.4 -76.9,-15" fill="#3B424C" />
-<polygon points="-36.2,-1.7 -48.67,5.5 -48.67,1.3 -36.2,-5.9" fill="#1E242B" /><polygon points="-61.83,-2.1 -48.67,5.5 -48.67,1.3 -61.83,-6.3" fill="#252B33" /><polygon points="-49.36,-13.5 -36.2,-5.9 -48.67,1.3 -61.83,-6.3" fill="#3B424C" />
-<polygon points="-21.13,7 -33.6,14.2 -33.6,10 -21.13,2.8" fill="#1E242B" /><polygon points="-46.77,6.6 -33.6,14.2 -33.6,10 -46.77,2.4" fill="#252B33" /><polygon points="-34.29,-4.8 -21.13,2.8 -33.6,10 -46.77,2.4" fill="#3B424C" />
-<polygon points="-6.06,15.7 -18.53,22.9 -18.53,18.7 -6.06,11.5" fill="#B35F08" /><polygon points="-31.7,15.3 -18.53,22.9 -18.53,18.7 -31.7,11.1" fill="#E07E12" /><polygon points="-19.23,3.9 -6.06,11.5 -18.53,18.7 -31.7,11.1" fill="#FF9A2E" />
-<polygon points="-63.74,-17.6 -76.21,-10.4 -76.21,-14.6 -63.74,-21.8" fill="#1E242B" /><polygon points="-135.1,-44.4 -76.21,-10.4 -76.21,-14.6 -135.1,-48.6" fill="#252B33" /><polygon points="-122.63,-55.8 -63.74,-21.8 -76.21,-14.6 -135.1,-48.6" fill="#454D58" />
-<g transform="matrix(0.8660 0.5000 -0.8660 0.5000 -122.11 -52.40)"><rect width="60" height="7" rx="2" fill="#596675" opacity=".28"/></g>
+  <g id="hero-keyboard" aria-label="Mechanical keyboard. Click a key to type, or use your keyboard.">
+    <g class="hero-key is-accent" data-action="escape">
+            <polygon points="-149.48,-104 -136.49,-96.5 -136.49,-99.1 -149.48,-106.6" fill="#B35F08"/>
+            <polygon points="-126.44,-102.3 -136.49,-96.5 -136.49,-99.1 -126.44,-104.9" fill="#E07E12"/>
+            <polygon class="hero-key-top" points="-139.43,-112.4 -126.44,-104.9 -136.49,-99.1 -149.48,-106.6" fill="#FF9A2E" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -139.43,-112.4 L -126.44,-104.9" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-137.96" y="-104.2" text-anchor="middle" font-size="3.5" fill="#1B2128" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">esc</text>
+          </g>
+    <g class="hero-key" data-key="1">
+            <polygon points="-134.76,-95.5 -121.77,-88 -121.77,-90.6 -134.76,-98.1" fill="#171C23"/>
+            <polygon points="-111.72,-93.8 -121.77,-88 -121.77,-90.6 -111.72,-96.4" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-124.71,-103.9 -111.72,-96.4 -121.77,-90.6 -134.76,-98.1" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -124.71,-103.9 L -111.72,-96.4" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-123.24" y="-95.7" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">1</text>
+          </g>
+    <g class="hero-key" data-key="2">
+            <polygon points="-120.04,-87 -107.04,-79.5 -107.04,-82.1 -120.04,-89.6" fill="#171C23"/>
+            <polygon points="-97,-85.3 -107.04,-79.5 -107.04,-82.1 -97,-87.9" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-109.99,-95.4 -97,-87.9 -107.04,-82.1 -120.04,-89.6" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -109.99,-95.4 L -97,-87.9" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-108.52" y="-87.2" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">2</text>
+          </g>
+    <g class="hero-key" data-key="3">
+            <polygon points="-105.31,-78.5 -92.32,-71 -92.32,-73.6 -105.31,-81.1" fill="#171C23"/>
+            <polygon points="-82.28,-76.8 -92.32,-71 -92.32,-73.6 -82.28,-79.4" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-95.27,-86.9 -82.28,-79.4 -92.32,-73.6 -105.31,-81.1" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -95.27,-86.9 L -82.28,-79.4" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-93.79" y="-78.7" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">3</text>
+          </g>
+    <g class="hero-key" data-key="4">
+            <polygon points="-90.59,-70 -77.6,-62.5 -77.6,-65.1 -90.59,-72.6" fill="#171C23"/>
+            <polygon points="-67.55,-68.3 -77.6,-62.5 -77.6,-65.1 -67.55,-70.9" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-80.54,-78.4 -67.55,-70.9 -77.6,-65.1 -90.59,-72.6" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -80.54,-78.4 L -67.55,-70.9" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-79.07" y="-70.2" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">4</text>
+          </g>
+    <g class="hero-key" data-key="5">
+            <polygon points="-75.87,-61.5 -62.88,-54 -62.88,-56.6 -75.87,-64.1" fill="#171C23"/>
+            <polygon points="-52.83,-59.8 -62.88,-54 -62.88,-56.6 -52.83,-62.4" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-65.82,-69.9 -52.83,-62.4 -62.88,-56.6 -75.87,-64.1" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -65.82,-69.9 L -52.83,-62.4" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-64.35" y="-61.7" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">5</text>
+          </g>
+    <g class="hero-key" data-key="6">
+            <polygon points="-61.15,-53 -48.15,-45.5 -48.15,-48.1 -61.15,-55.6" fill="#171C23"/>
+            <polygon points="-38.11,-51.3 -48.15,-45.5 -48.15,-48.1 -38.11,-53.9" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-51.1,-61.4 -38.11,-53.9 -48.15,-48.1 -61.15,-55.6" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -51.1,-61.4 L -38.11,-53.9" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-49.63" y="-53.2" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">6</text>
+          </g>
+    <g class="hero-key" data-key="7">
+            <polygon points="-46.42,-44.5 -33.43,-37 -33.43,-39.6 -46.42,-47.1" fill="#171C23"/>
+            <polygon points="-23.39,-42.8 -33.43,-37 -33.43,-39.6 -23.39,-45.4" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-36.38,-52.9 -23.39,-45.4 -33.43,-39.6 -46.42,-47.1" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -36.38,-52.9 L -23.39,-45.4" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-34.9" y="-44.7" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">7</text>
+          </g>
+    <g class="hero-key" data-key="8">
+            <polygon points="-31.7,-36 -18.71,-28.5 -18.71,-31.1 -31.7,-38.6" fill="#171C23"/>
+            <polygon points="-8.66,-34.3 -18.71,-28.5 -18.71,-31.1 -8.66,-36.9" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-21.65,-44.4 -8.66,-36.9 -18.71,-31.1 -31.7,-38.6" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -21.65,-44.4 L -8.66,-36.9" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-20.18" y="-36.2" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">8</text>
+          </g>
+    <g class="hero-key" data-key="9">
+            <polygon points="-16.98,-27.5 -3.99,-20 -3.99,-22.6 -16.98,-30.1" fill="#171C23"/>
+            <polygon points="6.06,-25.8 -3.99,-20 -3.99,-22.6 6.06,-28.4" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-6.93,-35.9 6.06,-28.4 -3.99,-22.6 -16.98,-30.1" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -6.93,-35.9 L 6.06,-28.4" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-5.46" y="-27.7" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">9</text>
+          </g>
+    <g class="hero-key" data-key="0">
+            <polygon points="-2.26,-19 10.73,-11.5 10.73,-14.1 -2.26,-21.6" fill="#171C23"/>
+            <polygon points="20.78,-17.3 10.73,-11.5 10.73,-14.1 20.78,-19.9" fill="#252C35"/>
+            <polygon class="hero-key-top" points="7.79,-27.4 20.78,-19.9 10.73,-14.1 -2.26,-21.6" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M 7.79,-27.4 L 20.78,-19.9" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="9.26" y="-19.2" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">0</text>
+          </g>
+    <g class="hero-key" data-action="backspace">
+            <polygon points="12.47,-10.5 25.46,-3 25.46,-5.6 12.47,-13.1" fill="#171C23"/>
+            <polygon points="35.5,-8.8 25.46,-3 25.46,-5.6 35.5,-11.4" fill="#252C35"/>
+            <polygon class="hero-key-top" points="22.51,-18.9 35.5,-11.4 25.46,-5.6 12.47,-13.1" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M 22.51,-18.9 L 35.5,-11.4" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="23.99" y="-10.7" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">⌫</text>
+          </g>
+    <g class="hero-key">
+            <polygon points="-160.56,-97.6 -147.57,-90.1 -147.57,-92.7 -160.56,-100.2" fill="#171C23"/>
+            <polygon points="-137.53,-95.9 -147.57,-90.1 -147.57,-92.7 -137.53,-98.5" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-150.52,-106 -137.53,-98.5 -147.57,-92.7 -160.56,-100.2" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -150.52,-106 L -137.53,-98.5" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-149.05" y="-97.8" text-anchor="middle" font-size="3.5" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">tab</text>
+          </g>
+    <g class="hero-key" data-key="q">
+            <polygon points="-145.84,-89.1 -132.85,-81.6 -132.85,-84.2 -145.84,-91.7" fill="#171C23"/>
+            <polygon points="-122.81,-87.4 -132.85,-81.6 -132.85,-84.2 -122.81,-90" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-135.8,-97.5 -122.81,-90 -132.85,-84.2 -145.84,-91.7" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -135.8,-97.5 L -122.81,-90" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-134.32" y="-89.3" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">Q</text>
+          </g>
+    <g class="hero-key" data-key="w">
+            <polygon points="-131.12,-80.6 -118.13,-73.1 -118.13,-75.7 -131.12,-83.2" fill="#171C23"/>
+            <polygon points="-108.08,-78.9 -118.13,-73.1 -118.13,-75.7 -108.08,-81.5" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-121.07,-89 -108.08,-81.5 -118.13,-75.7 -131.12,-83.2" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -121.07,-89 L -108.08,-81.5" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-119.6" y="-80.8" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">W</text>
+          </g>
+    <g class="hero-key" data-key="e">
+            <polygon points="-116.4,-72.1 -103.41,-64.6 -103.41,-67.2 -116.4,-74.7" fill="#171C23"/>
+            <polygon points="-93.36,-70.4 -103.41,-64.6 -103.41,-67.2 -93.36,-73" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-106.35,-80.5 -93.36,-73 -103.41,-67.2 -116.4,-74.7" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -106.35,-80.5 L -93.36,-73" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-104.88" y="-72.3" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">E</text>
+          </g>
+    <g class="hero-key" data-key="r">
+            <polygon points="-101.68,-63.6 -88.68,-56.1 -88.68,-58.7 -101.68,-66.2" fill="#171C23"/>
+            <polygon points="-78.64,-61.9 -88.68,-56.1 -88.68,-58.7 -78.64,-64.5" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-91.63,-72 -78.64,-64.5 -88.68,-58.7 -101.68,-66.2" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -91.63,-72 L -78.64,-64.5" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-90.16" y="-63.8" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">R</text>
+          </g>
+    <g class="hero-key" data-key="t">
+            <polygon points="-86.95,-55.1 -73.96,-47.6 -73.96,-50.2 -86.95,-57.7" fill="#171C23"/>
+            <polygon points="-63.92,-53.4 -73.96,-47.6 -73.96,-50.2 -63.92,-56" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-76.91,-63.5 -63.92,-56 -73.96,-50.2 -86.95,-57.7" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -76.91,-63.5 L -63.92,-56" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-75.43" y="-55.3" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">T</text>
+          </g>
+    <g class="hero-key" data-key="y">
+            <polygon points="-72.23,-46.6 -59.24,-39.1 -59.24,-41.7 -72.23,-49.2" fill="#171C23"/>
+            <polygon points="-49.19,-44.9 -59.24,-39.1 -59.24,-41.7 -49.19,-47.5" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-62.18,-55 -49.19,-47.5 -59.24,-41.7 -72.23,-49.2" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -62.18,-55 L -49.19,-47.5" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-60.71" y="-46.8" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">Y</text>
+          </g>
+    <g class="hero-key" data-key="u">
+            <polygon points="-57.51,-38.1 -44.52,-30.6 -44.52,-33.2 -57.51,-40.7" fill="#171C23"/>
+            <polygon points="-34.47,-36.4 -44.52,-30.6 -44.52,-33.2 -34.47,-39" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-47.46,-46.5 -34.47,-39 -44.52,-33.2 -57.51,-40.7" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -47.46,-46.5 L -34.47,-39" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-45.99" y="-38.3" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">U</text>
+          </g>
+    <g class="hero-key" data-key="i">
+            <polygon points="-42.79,-29.6 -29.8,-22.1 -29.8,-24.7 -42.79,-32.2" fill="#171C23"/>
+            <polygon points="-19.75,-27.9 -29.8,-22.1 -29.8,-24.7 -19.75,-30.5" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-32.74,-38 -19.75,-30.5 -29.8,-24.7 -42.79,-32.2" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -32.74,-38 L -19.75,-30.5" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-31.27" y="-29.8" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">I</text>
+          </g>
+    <g class="hero-key" data-key="o">
+            <polygon points="-28.06,-21.1 -15.07,-13.6 -15.07,-16.2 -28.06,-23.7" fill="#171C23"/>
+            <polygon points="-5.03,-19.4 -15.07,-13.6 -15.07,-16.2 -5.03,-22" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-18.02,-29.5 -5.03,-22 -15.07,-16.2 -28.06,-23.7" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -18.02,-29.5 L -5.03,-22" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-16.54" y="-21.3" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">O</text>
+          </g>
+    <g class="hero-key" data-key="p">
+            <polygon points="-13.34,-12.6 -0.35,-5.1 -0.35,-7.7 -13.34,-15.2" fill="#171C23"/>
+            <polygon points="9.7,-10.9 -0.35,-5.1 -0.35,-7.7 9.7,-13.5" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-3.29,-21 9.7,-13.5 -0.35,-7.7 -13.34,-15.2" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -3.29,-21 L 9.7,-13.5" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-1.82" y="-12.8" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">P</text>
+          </g>
+    <g class="hero-key is-accent" data-action="enter">
+            <polygon points="1.38,-4.1 14.37,3.4 14.37,0.8 1.38,-6.7" fill="#B35F08"/>
+            <polygon points="24.42,-2.4 14.37,3.4 14.37,0.8 24.42,-5" fill="#E07E12"/>
+            <polygon class="hero-key-top" points="11.43,-12.5 24.42,-5 14.37,0.8 1.38,-6.7" fill="#FF9A2E" stroke="#10151B" stroke-width=".35"/>
+            <path d="M 11.43,-12.5 L 24.42,-5" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="12.9" y="-4.3" text-anchor="middle" font-size="4.7" fill="#1B2128" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">⏎</text>
+          </g>
+    <g class="hero-key">
+            <polygon points="-171.65,-91.2 -158.66,-83.7 -158.66,-86.3 -171.65,-93.8" fill="#171C23"/>
+            <polygon points="-148.61,-89.5 -158.66,-83.7 -158.66,-86.3 -148.61,-92.1" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-161.6,-99.6 -148.61,-92.1 -158.66,-86.3 -171.65,-93.8" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -161.6,-99.6 L -148.61,-92.1" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-160.13" y="-91.4" text-anchor="middle" font-size="3.5" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">caps</text>
+          </g>
+    <g class="hero-key" data-key="a">
+            <polygon points="-156.93,-82.7 -143.94,-75.2 -143.94,-77.8 -156.93,-85.3" fill="#171C23"/>
+            <polygon points="-133.89,-81 -143.94,-75.2 -143.94,-77.8 -133.89,-83.6" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-146.88,-91.1 -133.89,-83.6 -143.94,-77.8 -156.93,-85.3" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -146.88,-91.1 L -133.89,-83.6" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-145.41" y="-82.9" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">A</text>
+          </g>
+    <g class="hero-key" data-key="s">
+            <polygon points="-142.21,-74.2 -129.21,-66.7 -129.21,-69.3 -142.21,-76.8" fill="#171C23"/>
+            <polygon points="-119.17,-72.5 -129.21,-66.7 -129.21,-69.3 -119.17,-75.1" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-132.16,-82.6 -119.17,-75.1 -129.21,-69.3 -142.21,-76.8" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -132.16,-82.6 L -119.17,-75.1" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-130.69" y="-74.4" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">S</text>
+          </g>
+    <g class="hero-key" data-key="d">
+            <polygon points="-127.48,-65.7 -114.49,-58.2 -114.49,-60.8 -127.48,-68.3" fill="#171C23"/>
+            <polygon points="-104.45,-64 -114.49,-58.2 -114.49,-60.8 -104.45,-66.6" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-117.44,-74.1 -104.45,-66.6 -114.49,-60.8 -127.48,-68.3" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -117.44,-74.1 L -104.45,-66.6" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-115.96" y="-65.9" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">D</text>
+          </g>
+    <g class="hero-key" data-key="f">
+            <polygon points="-112.76,-57.2 -99.77,-49.7 -99.77,-52.3 -112.76,-59.8" fill="#171C23"/>
+            <polygon points="-89.72,-55.5 -99.77,-49.7 -99.77,-52.3 -89.72,-58.1" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-102.71,-65.6 -89.72,-58.1 -99.77,-52.3 -112.76,-59.8" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -102.71,-65.6 L -89.72,-58.1" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-101.24" y="-57.4" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">F</text>
+          </g>
+    <g class="hero-key" data-key="g">
+            <polygon points="-98.04,-48.7 -85.05,-41.2 -85.05,-43.8 -98.04,-51.3" fill="#171C23"/>
+            <polygon points="-75,-47 -85.05,-41.2 -85.05,-43.8 -75,-49.6" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-87.99,-57.1 -75,-49.6 -85.05,-43.8 -98.04,-51.3" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -87.99,-57.1 L -75,-49.6" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-86.52" y="-48.9" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">G</text>
+          </g>
+    <g class="hero-key" data-key="h">
+            <polygon points="-83.32,-40.2 -70.33,-32.7 -70.33,-35.3 -83.32,-42.8" fill="#171C23"/>
+            <polygon points="-60.28,-38.5 -70.33,-32.7 -70.33,-35.3 -60.28,-41.1" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-73.27,-48.6 -60.28,-41.1 -70.33,-35.3 -83.32,-42.8" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -73.27,-48.6 L -60.28,-41.1" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-71.8" y="-40.4" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">H</text>
+          </g>
+    <g class="hero-key" data-key="j">
+            <polygon points="-68.59,-31.7 -55.6,-24.2 -55.6,-26.8 -68.59,-34.3" fill="#171C23"/>
+            <polygon points="-45.56,-30 -55.6,-24.2 -55.6,-26.8 -45.56,-32.6" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-58.55,-40.1 -45.56,-32.6 -55.6,-26.8 -68.59,-34.3" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -58.55,-40.1 L -45.56,-32.6" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-57.07" y="-31.9" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">J</text>
+          </g>
+    <g class="hero-key" data-key="k">
+            <polygon points="-53.87,-23.2 -40.88,-15.7 -40.88,-18.3 -53.87,-25.8" fill="#171C23"/>
+            <polygon points="-30.83,-21.5 -40.88,-15.7 -40.88,-18.3 -30.83,-24.1" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-43.82,-31.6 -30.83,-24.1 -40.88,-18.3 -53.87,-25.8" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -43.82,-31.6 L -30.83,-24.1" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-42.35" y="-23.4" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">K</text>
+          </g>
+    <g class="hero-key" data-key="l">
+            <polygon points="-39.15,-14.7 -26.16,-7.2 -26.16,-9.8 -39.15,-17.3" fill="#171C23"/>
+            <polygon points="-16.11,-13 -26.16,-7.2 -26.16,-9.8 -16.11,-15.6" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-29.1,-23.1 -16.11,-15.6 -26.16,-9.8 -39.15,-17.3" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -29.1,-23.1 L -16.11,-15.6" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-27.63" y="-14.9" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">L</text>
+          </g>
+    <g class="hero-key" data-key=";">
+            <polygon points="-24.43,-6.2 -11.44,1.3 -11.44,-1.3 -24.43,-8.8" fill="#171C23"/>
+            <polygon points="-1.39,-4.5 -11.44,1.3 -11.44,-1.3 -1.39,-7.1" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-14.38,-14.6 -1.39,-7.1 -11.44,-1.3 -24.43,-8.8" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -14.38,-14.6 L -1.39,-7.1" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-12.91" y="-6.4" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">;</text>
+          </g>
+    <g class="hero-key" data-key="&#x27;">
+            <polygon points="-9.7,2.3 3.29,9.8 3.29,7.2 -9.7,-0.3" fill="#171C23"/>
+            <polygon points="13.33,4 3.29,9.8 3.29,7.2 13.33,1.4" fill="#252C35"/>
+            <polygon class="hero-key-top" points="0.34,-6.1 13.33,1.4 3.29,7.2 -9.7,-0.3" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M 0.34,-6.1 L 13.33,1.4" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="1.81" y="2.1" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">&#x27;</text>
+          </g>
+    <g class="hero-key">
+            <polygon points="-182.74,-84.8 -169.74,-77.3 -169.74,-79.9 -182.74,-87.4" fill="#171C23"/>
+            <polygon points="-159.7,-83.1 -169.74,-77.3 -169.74,-79.9 -159.7,-85.7" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-172.69,-93.2 -159.7,-85.7 -169.74,-79.9 -182.74,-87.4" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -172.69,-93.2 L -159.7,-85.7" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-171.22" y="-85" text-anchor="middle" font-size="3.5" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">shift</text>
+          </g>
+    <g class="hero-key" data-key="z">
+            <polygon points="-168.01,-76.3 -155.02,-68.8 -155.02,-71.4 -168.01,-78.9" fill="#171C23"/>
+            <polygon points="-144.98,-74.6 -155.02,-68.8 -155.02,-71.4 -144.98,-77.2" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-157.97,-84.7 -144.98,-77.2 -155.02,-71.4 -168.01,-78.9" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -157.97,-84.7 L -144.98,-77.2" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-156.49" y="-76.5" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">Z</text>
+          </g>
+    <g class="hero-key" data-key="x">
+            <polygon points="-153.29,-67.8 -140.3,-60.3 -140.3,-62.9 -153.29,-70.4" fill="#171C23"/>
+            <polygon points="-130.25,-66.1 -140.3,-60.3 -140.3,-62.9 -130.25,-68.7" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-143.24,-76.2 -130.25,-68.7 -140.3,-62.9 -153.29,-70.4" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -143.24,-76.2 L -130.25,-68.7" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-141.77" y="-68" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">X</text>
+          </g>
+    <g class="hero-key" data-key="c">
+            <polygon points="-138.57,-59.3 -125.58,-51.8 -125.58,-54.4 -138.57,-61.9" fill="#171C23"/>
+            <polygon points="-115.53,-57.6 -125.58,-51.8 -125.58,-54.4 -115.53,-60.2" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-128.52,-67.7 -115.53,-60.2 -125.58,-54.4 -138.57,-61.9" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -128.52,-67.7 L -115.53,-60.2" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-127.05" y="-59.5" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">C</text>
+          </g>
+    <g class="hero-key" data-key="v">
+            <polygon points="-123.85,-50.8 -110.86,-43.3 -110.86,-45.9 -123.85,-53.4" fill="#171C23"/>
+            <polygon points="-100.81,-49.1 -110.86,-43.3 -110.86,-45.9 -100.81,-51.7" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-113.8,-59.2 -100.81,-51.7 -110.86,-45.9 -123.85,-53.4" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -113.8,-59.2 L -100.81,-51.7" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-112.33" y="-51" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">V</text>
+          </g>
+    <g class="hero-key" data-key="b">
+            <polygon points="-109.12,-42.3 -96.13,-34.8 -96.13,-37.4 -109.12,-44.9" fill="#171C23"/>
+            <polygon points="-86.09,-40.6 -96.13,-34.8 -96.13,-37.4 -86.09,-43.2" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-99.08,-50.7 -86.09,-43.2 -96.13,-37.4 -109.12,-44.9" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -99.08,-50.7 L -86.09,-43.2" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-97.6" y="-42.5" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">B</text>
+          </g>
+    <g class="hero-key" data-key="n">
+            <polygon points="-94.4,-33.8 -81.41,-26.3 -81.41,-28.9 -94.4,-36.4" fill="#171C23"/>
+            <polygon points="-71.36,-32.1 -81.41,-26.3 -81.41,-28.9 -71.36,-34.7" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-84.35,-42.2 -71.36,-34.7 -81.41,-28.9 -94.4,-36.4" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -84.35,-42.2 L -71.36,-34.7" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-82.88" y="-34" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">N</text>
+          </g>
+    <g class="hero-key" data-key="m">
+            <polygon points="-79.68,-25.3 -66.69,-17.8 -66.69,-20.4 -79.68,-27.9" fill="#171C23"/>
+            <polygon points="-56.64,-23.6 -66.69,-17.8 -66.69,-20.4 -56.64,-26.2" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-69.63,-33.7 -56.64,-26.2 -66.69,-20.4 -79.68,-27.9" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -69.63,-33.7 L -56.64,-26.2" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-68.16" y="-25.5" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">M</text>
+          </g>
+    <g class="hero-key" data-key=",">
+            <polygon points="-64.96,-16.8 -51.97,-9.3 -51.97,-11.9 -64.96,-19.4" fill="#171C23"/>
+            <polygon points="-41.92,-15.1 -51.97,-9.3 -51.97,-11.9 -41.92,-17.7" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-54.91,-25.2 -41.92,-17.7 -51.97,-11.9 -64.96,-19.4" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -54.91,-25.2 L -41.92,-17.7" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-53.44" y="-17" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">,</text>
+          </g>
+    <g class="hero-key" data-key=".">
+            <polygon points="-50.23,-8.3 -37.24,-0.8 -37.24,-3.4 -50.23,-10.9" fill="#171C23"/>
+            <polygon points="-27.2,-6.6 -37.24,-0.8 -37.24,-3.4 -27.2,-9.2" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-40.19,-16.7 -27.2,-9.2 -37.24,-3.4 -50.23,-10.9" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -40.19,-16.7 L -27.2,-9.2" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-38.72" y="-8.5" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">.</text>
+          </g>
+    <g class="hero-key" data-key="/">
+            <polygon points="-35.51,0.2 -22.52,7.7 -22.52,5.1 -35.51,-2.4" fill="#171C23"/>
+            <polygon points="-12.47,1.9 -22.52,7.7 -22.52,5.1 -12.47,-0.7" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-25.47,-8.2 -12.47,-0.7 -22.52,5.1 -35.51,-2.4" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -25.47,-8.2 L -12.47,-0.7" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-23.99" y="0" text-anchor="middle" font-size="4.7" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">/</text>
+          </g>
+    <g class="hero-key">
+            <polygon points="-20.79,8.7 -7.8,16.2 -7.8,13.6 -20.79,6.1" fill="#171C23"/>
+            <polygon points="2.25,10.4 -7.8,16.2 -7.8,13.6 2.25,7.8" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-10.74,0.3 2.25,7.8 -7.8,13.6 -20.79,6.1" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -10.74,0.3 L 2.25,7.8" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-9.27" y="8.5" text-anchor="middle" font-size="3.5" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">shift</text>
+          </g>
+    <g class="hero-key">
+            <polygon points="-193.82,-78.4 -180.83,-70.9 -180.83,-73.5 -193.82,-81" fill="#171C23"/>
+            <polygon points="-170.78,-76.7 -180.83,-70.9 -180.83,-73.5 -170.78,-79.3" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-183.77,-86.8 -170.78,-79.3 -180.83,-73.5 -193.82,-81" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -183.77,-86.8 L -170.78,-79.3" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-182.3" y="-78.6" text-anchor="middle" font-size="3.5" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">ctrl</text>
+          </g>
+    <g class="hero-key">
+            <polygon points="-179.1,-69.9 -166.11,-62.4 -166.11,-65 -179.1,-72.5" fill="#171C23"/>
+            <polygon points="-156.06,-68.2 -166.11,-62.4 -166.11,-65 -156.06,-70.8" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-169.05,-78.3 -156.06,-70.8 -166.11,-65 -179.1,-72.5" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -169.05,-78.3 L -156.06,-70.8" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-167.58" y="-70.1" text-anchor="middle" font-size="3.5" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">win</text>
+          </g>
+    <g class="hero-key">
+            <polygon points="-164.38,-61.4 -151.39,-53.9 -151.39,-56.5 -164.38,-64" fill="#171C23"/>
+            <polygon points="-141.34,-59.7 -151.39,-53.9 -151.39,-56.5 -141.34,-62.3" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-154.33,-69.8 -141.34,-62.3 -151.39,-56.5 -164.38,-64" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -154.33,-69.8 L -141.34,-62.3" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-152.86" y="-61.6" text-anchor="middle" font-size="3.5" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">alt</text>
+          </g>
+    <g class="hero-key" data-key=" ">
+            <polygon points="-149.65,-52.9 -77.77,-11.4 -77.77,-14 -149.65,-55.5" fill="#171C23"/>
+            <polygon points="-67.73,-17.2 -77.77,-11.4 -77.77,-14 -67.73,-19.8" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-139.61,-61.3 -67.73,-19.8 -77.77,-14 -149.65,-55.5" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -139.61,-61.3 L -67.73,-19.8" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-108.69" y="-36.1" text-anchor="middle" font-size="3.5" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">space</text>
+          </g>
+    <g class="hero-key">
+            <polygon points="-76.04,-10.4 -63.05,-2.9 -63.05,-5.5 -76.04,-13" fill="#171C23"/>
+            <polygon points="-53,-8.7 -63.05,-2.9 -63.05,-5.5 -53,-11.3" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-66,-18.8 -53,-11.3 -63.05,-5.5 -76.04,-13" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -66,-18.8 L -53,-11.3" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-64.52" y="-10.6" text-anchor="middle" font-size="3.5" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">alt</text>
+          </g>
+    <g class="hero-key">
+            <polygon points="-61.32,-1.9 -48.33,5.6 -48.33,3 -61.32,-4.5" fill="#171C23"/>
+            <polygon points="-38.28,-0.2 -48.33,5.6 -48.33,3 -38.28,-2.8" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-51.27,-10.3 -38.28,-2.8 -48.33,3 -61.32,-4.5" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -51.27,-10.3 L -38.28,-2.8" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-49.8" y="-2.1" text-anchor="middle" font-size="3.5" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">fn</text>
+          </g>
+    <g class="hero-key">
+            <polygon points="-46.6,6.6 -33.61,14.1 -33.61,11.5 -46.6,4" fill="#171C23"/>
+            <polygon points="-23.56,8.3 -33.61,14.1 -33.61,11.5 -23.56,5.7" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-36.55,-1.8 -23.56,5.7 -33.61,11.5 -46.6,4" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -36.55,-1.8 L -23.56,5.7" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-35.08" y="6.4" text-anchor="middle" font-size="3.5" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">menu</text>
+          </g>
+    <g class="hero-key">
+            <polygon points="-31.87,15.1 -18.88,22.6 -18.88,20 -31.87,12.5" fill="#171C23"/>
+            <polygon points="-8.84,16.8 -18.88,22.6 -18.88,20 -8.84,14.2" fill="#252C35"/>
+            <polygon class="hero-key-top" points="-21.83,6.7 -8.84,14.2 -18.88,20 -31.87,12.5" fill="#3B444F" stroke="#10151B" stroke-width=".35"/>
+            <path d="M -21.83,6.7 L -8.84,14.2" stroke="#667382" stroke-width=".35" opacity=".55"/>
+            <text class="hero-key-label" x="-20.36" y="14.9" text-anchor="middle" font-size="3.5" fill="#B6C0CB" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">ctrl</text>
+          </g>
+  </g>
 <polygon points="79.67,51.2 72.57,54.35 64.3,56.32 55.43,57 46.55,56.32 38.28,54.35 31.18,51.2 25.73,47.1 22.3,42.32 21.13,37.2 22.3,32.08 25.73,27.3 31.18,23.2 38.28,20.05 46.55,18.08 55.43,17.4 64.3,18.08 72.57,20.05 79.67,23.2 85.12,27.3 88.55,32.08 89.72,37.2 88.55,42.32 85.12,47.1" fill="#2A3038" opacity=".10" filter="url(#softSm)"/>
 <polygon points="96.99,38 55.43,62 55.43,52 96.99,28" fill="#1F242B" /><polygon points="15.59,39 55.43,62 55.43,52 15.59,29" fill="#252B33" /><polygon points="57.16,5 96.99,28 55.43,52 15.59,29" fill="#2F353D" />
 <g transform="matrix(0.8660 0.5000 -0.8660 0.5000 57.16 7.60)"><rect width="40" height="42" rx="13" fill="#363D46"/></g>
