@@ -1,21 +1,39 @@
+import { Link, type LinkProps } from "@tanstack/react-router";
 import type React from "react";
 import type { SocialLink } from "@/types";
 import { ThemeToggle } from "./theme-toggle";
-import { Button } from "./ui/button";
+import { buttonVariants } from "./ui/button";
 import { Dock, DockIcon } from "./ui/dock";
 import { Separator } from "./ui/separator";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 function DocNavLinkButton({ link, target }: { link: SocialLink; target: React.HTMLAttributeAnchorTarget }) {
+  const [pathname, hash] = link.link.split("#");
+  const isInternal = target === "_self" && pathname.startsWith("/");
+  const icon = <link.icon className="text-foreground size-3 md:size-4" />;
+
   return (
     <DockIcon className="p-1">
       <Tooltip>
         <TooltipTrigger asChild>
-          <a href={link.link} target={target}>
-            <Button variant={"ghost"} size={"icon"}>
-              <link.icon className="text-foreground size-3 md:size-4" />
-            </Button>
-          </a>
+          {isInternal ? (
+            <Link
+              to={pathname as LinkProps["to"]}
+              hash={hash}
+              target={target}
+              aria-label={link.name}
+              className={buttonVariants({ variant: "ghost", size: "icon" })}>
+              {icon}
+            </Link>
+          ) : (
+            <a
+              href={link.link}
+              target={target}
+              aria-label={link.name}
+              className={buttonVariants({ variant: "ghost", size: "icon" })}>
+              {icon}
+            </a>
+          )}
         </TooltipTrigger>
         <TooltipContent>
           <p>{link.name}</p>

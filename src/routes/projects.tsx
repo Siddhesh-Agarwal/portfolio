@@ -39,6 +39,12 @@ function ProjectsPage() {
       <section className="container min-w-full px-0 py-6 md:pb-12">
         <ProjectsSection details={projectsOrTools} />
       </section>
+      <div className="flex justify-center px-4 pb-8 md:hidden">
+        <Link to="/" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
+          <ArrowLeftIcon size={16} />
+          Back to home
+        </Link>
+      </div>
     </PageLayout>
   );
 }
