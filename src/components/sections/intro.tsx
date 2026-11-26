@@ -21,7 +21,7 @@ export default function IntroSection({ groups }: { groups: ToolGroup[] }) {
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Software engineer</p>
           </div>
           <h1 className="text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
-            Hi, I&apos;m Siddhesh 👋🏻
+            Hi, I&apos;m Siddhesh!
           </h1>
           <p className="text-pretty leading-relaxed">
             I am a <strong>Hobbyist Developer</strong> with a keen interest in{" "}
