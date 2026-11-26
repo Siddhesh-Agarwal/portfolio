@@ -1,4 +1,5 @@
 import { ExternalLinkIcon } from "lucide-react";
+import SectionHeading from "@/components/section-heading";
 import { Badge } from "@/components/ui/badge";
 import { formatDate } from "@/lib/date";
 import type { LinkInfo, Project } from "@/types";
@@ -61,10 +62,12 @@ export default function ProjectsSection({ details }: { details: Project[] }) {
 
   return (
     <div className="flex flex-col gap-4 w-full mx-auto px-4">
-      <h1 className="text-4xl font-bold mb-6 semibold text-center text-foreground/90">Check out my latest work</h1>
-      <h2 className="text-xl text-center text-foreground/75">
-        I have worked on a variety of projects ranging over different tech stacks and topics. Here are all of them.
-      </h2>
+      <SectionHeading
+        level={1}
+        eyebrow="Projects"
+        title="Things I've built"
+        description="A collection of projects across web, data, and infrastructure."
+      />
       <div className="flex flex-col gap-4">
         {sortedProjects.map((tool: Project) => (
           <ProjectCard key={tool.name} data={tool} />

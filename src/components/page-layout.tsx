@@ -16,7 +16,7 @@ export default function PageLayout({
   return (
     <main
       className={cn(
-        "bg-background text-foreground container-fluid p-0 min-h-screen w-full overflow-x-hidden pb-8 md:pb-[75vh]",
+        "bg-background text-foreground container-fluid p-0 min-h-screen w-full overflow-x-hidden pb-8 md:pb-32",
         className,
       )}>
       <div className="max-w-4xl mx-auto">{children}</div>

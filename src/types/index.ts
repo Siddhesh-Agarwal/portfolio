@@ -17,6 +17,11 @@ type ToolLink = {
   icon: IconType;
 };
 
+type ToolGroup = {
+  name: string;
+  tools: ToolLink[];
+};
+
 type SocialLink = {
   name: string;
   icon: IconType;
@@ -54,4 +59,4 @@ type ExperienceDetail = {
   location: string | "remote";
 };
 
-export type { CustomDate, LinkInfo, ToolLink, SocialLink, Project, EducationDetails, ExperienceDetail };
+export type { CustomDate, LinkInfo, ToolLink, ToolGroup, SocialLink, Project, EducationDetails, ExperienceDetail };

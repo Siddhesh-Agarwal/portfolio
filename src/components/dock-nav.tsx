@@ -1,5 +1,6 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import type React from "react";
+import { cn } from "@/lib/utils";
 import type { SocialLink } from "@/types";
 import { ThemeToggle } from "./theme-toggle";
 import { buttonVariants } from "./ui/button";
@@ -11,6 +12,7 @@ function DocNavLinkButton({ link, target }: { link: SocialLink; target: React.HT
   const [pathname, hash] = link.link.split("#");
   const isInternal = target === "_self" && pathname.startsWith("/");
   const icon = <link.icon className="text-foreground size-3 md:size-4" />;
+  const linkClassName = cn(buttonVariants({ variant: "ghost", size: "icon" }), "rounded-full hover:bg-transparent");
 
   return (
     <DockIcon className="p-1">
@@ -22,15 +24,11 @@ function DocNavLinkButton({ link, target }: { link: SocialLink; target: React.HT
               hash={hash}
               target={target}
               aria-label={link.name}
-              className={buttonVariants({ variant: "ghost", size: "icon" })}>
+              className={linkClassName}>
               {icon}
             </Link>
           ) : (
-            <a
-              href={link.link}
-              target={target}
-              aria-label={link.name}
-              className={buttonVariants({ variant: "ghost", size: "icon" })}>
+            <a href={link.link} target={target} aria-label={link.name} className={linkClassName}>
               {icon}
             </a>
           )}
@@ -47,6 +45,7 @@ export default function DockNav({ sectionNav, socialLinks }: { sectionNav: Socia
   return (
     <Dock
       direction="middle"
+      disableMagnification
       className="z-50 pointer-events-auto relative flex min-h-full h-full bg-transparent items-center px-0 md:px-2 bg-opacity-75">
       {sectionNav.map((value: SocialLink) => (
         <DocNavLinkButton link={value} key={value.name} target="_self" />

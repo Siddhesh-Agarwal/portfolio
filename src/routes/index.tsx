@@ -6,7 +6,7 @@ import ExperienceSection from "@/components/sections/experience";
 import IntroSection from "@/components/sections/intro";
 import { Button } from "@/components/ui/button";
 import { experienceDetails } from "@/data/experience";
-import { toolsKnown } from "@/data/intro";
+import { toolGroups } from "@/data/intro";
 
 export const Route = createFileRoute("/")({
   component: App,
@@ -37,7 +37,7 @@ function App() {
   return (
     <PageLayout sectionNav={sectionNav}>
       <section className="container min-h-screen min-w-full px-0 grid place-items-center" id={introId}>
-        <IntroSection links={toolsKnown} />
+        <IntroSection groups={toolGroups} />
       </section>
       <section className="container min-h-screen min-w-full px-0 py-6 md:pb-12" id={experienceId}>
         <ExperienceSection details={experienceDetails} />

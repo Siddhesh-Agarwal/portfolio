@@ -29,7 +29,7 @@ function ProjectsPage() {
   ];
 
   return (
-    <PageLayout sectionNav={sectionNav} className="pb-28 md:pb-32">
+    <PageLayout sectionNav={sectionNav}>
       <div className="px-4 pt-8 md:hidden">
         <Link to="/" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
           <ArrowLeftIcon size={16} />

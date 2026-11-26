@@ -1,7 +1,7 @@
 import { Building2Icon, BuildingIcon, CalendarIcon, MapPinIcon } from "lucide-react";
+import SectionHeading from "@/components/section-heading";
 import Timeline from "@/components/timeline";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { ShineBorder } from "@/components/ui/shine-border";
 import { formatDate } from "@/lib/date";
 import type { ExperienceDetail } from "@/types";
 
@@ -24,8 +24,7 @@ function ExperienceCardCompanyInfo({ details }: { details: ExperienceDetail["com
 
 function ExperienceCard({ detail }: { detail: ExperienceDetail }) {
   return (
-    <Card className="relative border-border">
-      <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
+    <Card className="border-border">
       <CardContent className="flex flex-col gap-3">
         <CardTitle>{detail.position}</CardTitle>
         <div className="flex flex-col gap-2">
@@ -44,7 +43,9 @@ function ExperienceCard({ detail }: { detail: ExperienceDetail }) {
         {detail.desc.length > 0 && (
           <ul className="text-sm text-card-foreground list-disc pl-5 space-y-1">
             {detail.desc.map((point) => (
-              <li key={point} className="list-item">{point}</li>
+              <li key={point} className="list-item">
+                {point}
+              </li>
             ))}
           </ul>
         )}
@@ -54,7 +55,7 @@ function ExperienceCard({ detail }: { detail: ExperienceDetail }) {
 }
 
 export default function ExperienceSection({ details }: { details: ExperienceDetail[] }) {
-  const elements = details
+  const elements = [...details]
     .sort((a, b) => {
       if (a.startDate.year === b.startDate.year) {
         return b.startDate.month - a.startDate.month;
@@ -65,8 +66,8 @@ export default function ExperienceSection({ details }: { details: ExperienceDeta
       <ExperienceCard detail={detail} key={`${detail.company}-${detail.position}-${detail.startDate.year}`} />
     ));
   return (
-    <div className="flex flex-col gap-4 w-full mx-auto">
-      <h1 className="text-5xl font-sans text-center font-bold mb-6 semibold">My Experience</h1>
+    <div className="flex flex-col gap-4 w-full mx-auto px-4">
+      <SectionHeading eyebrow="Experience" title="Where I've worked" />
       <div className="relative wrap overflow-hidden p-4 md:p-10 h-full">
         <Timeline elements={elements} />
       </div>
