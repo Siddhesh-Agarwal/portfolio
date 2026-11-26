@@ -9,7 +9,7 @@ export const projectsOrTools: Project[] = [
         name: "GitHub",
         url: "https://github.com/Siddhesh-Agarwal/words",
       },
-      { name: "Live", url: "https://words.siddhesh.cc/" }
+      { name: "Live", url: "https://words.siddhesh.cc/" },
     ],
     tags: ["TypeScript", "React.js", "Tanstack"],
     date: { year: 2026, month: 11 },
@@ -35,10 +35,23 @@ export const projectsOrTools: Project[] = [
         name: "GitHub",
         url: "https://github.com/Siddhesh-Agarwal/totp-generator",
       },
-      { name: "Live", url: "https://totp.siddhesh.cc/" }
+      { name: "Live", url: "https://totp.siddhesh.cc/" },
     ],
     tags: ["TypeScript", "React.js", "Web Crypto API"],
     date: { year: 2026, month: 10 },
+  },
+  {
+    name: "Flaguess",
+    desc: "A flag-guessing game that tests your geography knowledge across all 195 countries, with score and streak tracking.",
+    links: [
+      {
+        name: "GitHub",
+        url: "https://github.com/Siddhesh-Agarwal/flaguess",
+      },
+      { name: "Live", url: "https://flaguess.siddhesh.cc/" },
+    ],
+    tags: ["TypeScript", "React.js", "Vite", "Tailwind CSS", "Cloudflare"],
+    date: { year: 2026, month: 9 },
   },
   {
     name: "TradingView News Feed",
