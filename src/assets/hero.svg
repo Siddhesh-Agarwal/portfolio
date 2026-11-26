@@ -1,11 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-600 -620 1200 860" width="1200" height="860" role="img" aria-labelledby="heroTitle heroDesc">
 <title id="heroTitle">Isometric developer desk</title>
-<desc id="heroDesc">An isometric developer desk with two monitors, a mechanical keyboard, a coffee mug, a potted plant, a rubber duck, and a server rack, with sodium orange highlights on a soft pastel background.</desc>
+<desc id="heroDesc">An isometric developer desk with two monitors, a mechanical keyboard, a coffee mug, a potted plant, a rubber duck, and a server rack, with sodium orange highlights.</desc>
 <defs>
-  <radialGradient id="bgGlow" cx="50%" cy="52%" r="58%">
-    <stop offset="0%" stop-color="#FBF8F3"/>
-    <stop offset="100%" stop-color="#E8EDF2"/>
-  </radialGradient>
   <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
     <feGaussianBlur stdDeviation="14"/>
   </filter>
@@ -13,10 +9,6 @@
     <feGaussianBlur stdDeviation="6"/>
   </filter>
 </defs>
-<rect x="-600" y="-620" width="1200" height="860" fill="url(#bgGlow)"/>
-<circle cx="0" cy="-170" r="400" fill="#F6DFC6" opacity=".62"/>
-<circle cx="0" cy="-170" r="410" fill="none" stroke="#EBCBAA" stroke-width="1.2" opacity=".45"/>
-
 <polygon points="277.13,150 230.36,173.06 177.93,191.61 121.11,205.2 61.31,213.49 0,216.27 -61.31,213.49 -121.11,205.2 -177.93,191.61 -230.36,173.06 -277.13,150 -317.07,123 -349.2,92.73 -372.74,59.92 -387.09,25.4 -391.92,-10 -387.09,-45.4 -372.74,-79.92 -349.2,-112.73 -317.07,-143 -277.13,-170 -230.36,-193.06 -177.93,-211.61 -121.11,-225.2 -61.31,-233.49 0,-236.27 61.31,-233.49 121.11,-225.2 177.93,-211.61 230.36,-193.06 277.13,-170 317.07,-143 349.2,-112.73 372.74,-79.92 387.09,-45.4 391.92,-10 387.09,25.4 372.74,59.92 349.2,92.73 317.07,123" fill="#2A3038" opacity=".10" filter="url(#soft)"/>
 <polygon points="207.85,110 168.6,129.01 124.22,143.81 76.08,153.92 25.62,159.06 -25.62,159.06 -76.08,153.92 -124.22,143.81 -168.6,129.01 -207.85,110 -240.78,87.34 -266.4,61.72 -283.92,33.92 -292.82,4.79 -292.82,-24.79 -283.92,-53.92 -266.4,-81.72 -240.78,-107.34 -207.85,-130 -168.6,-149.01 -124.22,-163.81 -76.08,-173.92 -25.62,-179.06 25.62,-179.06 76.08,-173.92 124.22,-163.81 168.6,-149.01 207.85,-130 240.78,-107.34 266.4,-81.72 283.92,-53.92 292.82,-24.79 292.82,4.79 283.92,33.92 266.4,61.72 240.78,87.34" fill="#2A3038" opacity=".06" filter="url(#soft)"/>
 <polygon points="-233.83,-160 -254.2,-150.62 -277.67,-144.09 -303.07,-140.75 -329.13,-140.75 -354.53,-144.09 -378,-150.62 -398.37,-160 -414.62,-171.76 -425.92,-185.31 -431.72,-199.98 -431.72,-215.02 -425.92,-229.69 -414.62,-243.24 -398.37,-255 -378,-264.38 -354.53,-270.91 -329.13,-274.25 -303.07,-274.25 -277.67,-270.91 -254.2,-264.38 -233.83,-255 -217.58,-243.24 -206.28,-229.69 -200.48,-215.02 -200.48,-199.98 -206.28,-185.31 -217.58,-171.76" fill="#2A3038" opacity=".12" filter="url(#soft)"/>
@@ -295,5 +287,4 @@
 <path d="M -217.49 -120 L -202.49 -115 L -217.49 -110 Z" fill="#FF9A2E"/>
 <circle cx="-222.49" cy="-121" r="1.8" fill="#2A3038"/>
 <path d="M -236.49 -127 C -230.49 -135 -220.49 -135 -215.49 -129" fill="none" stroke="#E3BC59" stroke-width="2" stroke-linecap="round"/>
-<path d="M -600 218 C -300 254 300 254 600 218 L 600 240 L -600 240 Z" fill="#DDE5EB" opacity=".35"/>
 </svg>
