@@ -173,35 +173,6 @@
     --shadow-lg: var(--shadow-lg);
     --shadow-xl: var(--shadow-xl);
     --shadow-2xl: var(--shadow-2xl);
-    --animate-shine: shine var(--duration) infinite linear;
-    @keyframes shine {
-        0% {
-            background-position: 0% 0%;
-        }
-        50% {
-            background-position: 100% 100%;
-        }
-        to {
-            background-position: 0% 0%;
-        }
-    }
-}
-
-@theme inline {
-    --animate-orbit: orbit calc(var(--duration) * 1s) linear infinite;
-
-    @keyframes orbit {
-        0% {
-            transform: rotate(calc(var(--angle) * 1deg))
-                translateY(calc(var(--radius) * 1px))
-                rotate(calc(var(--angle) * -1deg));
-        }
-        100% {
-            transform: rotate(calc(var(--angle) * 1deg + 360deg))
-                translateY(calc(var(--radius) * 1px))
-                rotate(calc((var(--angle) * -1deg) - 360deg));
-        }
-    }
 }
 
 body {

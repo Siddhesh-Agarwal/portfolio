@@ -43,7 +43,7 @@ export default function Timeline({ elements }: { elements: ReactNode[] }) {
       <Progress
         value={scrollProgress * 100}
         orientation="vertical"
-        className="absolute left-4 top-4 h-[calc(100%-2rem)] -translate-x-1/2 w-0.5 bg-transparent **:data-[slot=progress-indicator]:bg-primary **:data-[slot=progress-indicator]:shadow-[0_0_8px_rgba(59,130,246,0.5)]"
+        className="absolute left-4 top-4 h-[calc(100%-2rem)] -translate-x-1/2 w-0.5 bg-transparent **:data-[slot=progress-indicator]:bg-primary"
       />
 
       {elements.map((item, index) => (

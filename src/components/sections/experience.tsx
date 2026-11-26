@@ -63,7 +63,10 @@ export default function ExperienceSection({ details }: { details: ExperienceDeta
       return b.startDate.year - a.startDate.year;
     })
     .map((detail) => (
-      <ExperienceCard detail={detail} key={`${detail.company}-${detail.position}-${detail.startDate.year}`} />
+      <ExperienceCard
+        detail={detail}
+        key={`${detail.company.name}-${detail.position}-${detail.startDate.year}-${detail.startDate.month}`}
+      />
     ));
   return (
     <div className="flex flex-col gap-4 w-full mx-auto px-4">

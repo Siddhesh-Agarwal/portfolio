@@ -20,7 +20,10 @@ export default function StackIndex({ groups }: { groups: ToolGroup[] }) {
                 <li
                   key={tool.name}
                   className="group flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground">
-                  <tool.icon className="size-3.5 shrink-0 transition-colors group-hover:text-primary" />
+                  <tool.icon
+                    aria-hidden="true"
+                    className="size-3.5 shrink-0 transition-colors group-hover:text-primary"
+                  />
                   <span>{tool.name}</span>
                 </li>
               ))}

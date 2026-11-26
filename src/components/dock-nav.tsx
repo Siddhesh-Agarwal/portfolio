@@ -12,10 +12,13 @@ function DocNavLinkButton({ link, target }: { link: SocialLink; target: React.HT
   const [pathname, hash] = link.link.split("#");
   const isInternal = target === "_self" && pathname.startsWith("/");
   const icon = <link.icon className="text-foreground size-3 md:size-4" />;
-  const linkClassName = cn(buttonVariants({ variant: "ghost", size: "icon" }), "rounded-full hover:bg-transparent");
+  const linkClassName = cn(
+    buttonVariants({ variant: "ghost", size: "icon" }),
+    "rounded-full hover:bg-transparent dark:hover:bg-transparent",
+  );
 
   return (
-    <DockIcon className="p-1">
+    <DockIcon className="p-1" disableMagnification>
       <Tooltip>
         <TooltipTrigger asChild>
           {isInternal ? (
@@ -46,7 +49,7 @@ export default function DockNav({ sectionNav, socialLinks }: { sectionNav: Socia
     <Dock
       direction="middle"
       disableMagnification
-      className="z-50 pointer-events-auto relative flex min-h-full h-full bg-transparent items-center px-0 md:px-2 bg-opacity-75">
+      className="z-50 pointer-events-auto relative flex h-full bg-transparent items-center px-0 md:px-2">
       {sectionNav.map((value: SocialLink) => (
         <DocNavLinkButton link={value} key={value.name} target="_self" />
       ))}
@@ -56,14 +59,7 @@ export default function DockNav({ sectionNav, socialLinks }: { sectionNav: Socia
       ))}
       <Separator orientation="vertical" className="h-full" />
       <DockIcon>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <ThemeToggle />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Theme</p>
-          </TooltipContent>
-        </Tooltip>
+        <ThemeToggle />
       </DockIcon>
     </Dock>
   );

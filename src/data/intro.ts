@@ -68,15 +68,11 @@ export const toolGroups: ToolGroup[] = [
     ],
   },
   {
-    name: "Frameworks & ML",
+    name: "Frameworks",
     tools: [
       { name: "FastAPI", icon: SiFastapi },
       { name: "Flask", icon: SiFlask },
       { name: "Django", icon: SiDjango },
-      { name: "SciPy", icon: SiScipy },
-      { name: "PyTorch", icon: SiPytorch },
-      { name: "Scikit Learn", icon: SiScikitlearn },
-      { name: "TensorFlow", icon: SiTensorflow },
       { name: "Streamlit", icon: SiStreamlit },
       { name: "Bootstrap", icon: SiBootstrap },
       { name: "Tailwind CSS", icon: SiTailwindcss },
@@ -89,8 +85,12 @@ export const toolGroups: ToolGroup[] = [
     ],
   },
   {
-    name: "Tools",
+    name: "ML & Tools",
     tools: [
+      { name: "SciPy", icon: SiScipy },
+      { name: "PyTorch", icon: SiPytorch },
+      { name: "Scikit Learn", icon: SiScikitlearn },
+      { name: "TensorFlow", icon: SiTensorflow },
       { name: "Node.js", icon: SiNodedotjs },
       { name: "Git", icon: SiGit },
       { name: "GitHub", icon: SiGithub },
