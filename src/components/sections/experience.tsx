@@ -55,24 +55,22 @@ function ExperienceCard({ detail }: { detail: ExperienceDetail }) {
 }
 
 export default function ExperienceSection({ details }: { details: ExperienceDetail[] }) {
-  const elements = [...details]
+  const items = [...details]
     .sort((a, b) => {
       if (a.startDate.year === b.startDate.year) {
         return b.startDate.month - a.startDate.month;
       }
       return b.startDate.year - a.startDate.year;
     })
-    .map((detail) => (
-      <ExperienceCard
-        detail={detail}
-        key={`${detail.company.name}-${detail.position}-${detail.startDate.year}-${detail.startDate.month}`}
-      />
-    ));
+    .map((detail) => ({
+      key: `${detail.company.name}-${detail.position}-${detail.startDate.year}-${detail.startDate.month}`,
+      content: <ExperienceCard detail={detail} />,
+    }));
   return (
     <div className="flex flex-col gap-4 w-full mx-auto px-4">
       <SectionHeading eyebrow="Experience" title="Where I've worked" />
       <div className="relative wrap overflow-hidden p-4 md:p-10 h-full">
-        <Timeline elements={elements} />
+        <Timeline items={items} />
       </div>
     </div>
   );

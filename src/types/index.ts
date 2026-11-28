@@ -59,4 +59,4 @@ type ExperienceDetail = {
   location: string | "remote";
 };
 
-export type { CustomDate, LinkInfo, ToolLink, ToolGroup, SocialLink, Project, EducationDetails, ExperienceDetail };
+export type { CustomDate, EducationDetails, ExperienceDetail, LinkInfo, Project, SocialLink, ToolGroup, ToolLink };

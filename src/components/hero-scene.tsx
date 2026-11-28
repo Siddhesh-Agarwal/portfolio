@@ -206,20 +206,7 @@ export default function HeroScene() {
 
   return (
     <div className="hero-scene-frame">
-      <div ref={hostRef} className="aspect-[1200/860] select-none [&>svg]:block [&>svg]:h-auto [&>svg]:w-full" />
-      <div className="flex w-full flex-col gap-1.5 border-t border-white/10 bg-[#1b2128] px-3 py-2.5 text-left font-mono">
-        <div className="flex items-center justify-between gap-3 text-[8px] uppercase tracking-[0.14em] text-[#7c8a99] sm:text-[9px]">
-          <span className="flex items-center gap-1.5">
-            <span className="size-1.5 rounded-full bg-[#ff9a2e]" />
-            rack {running}/7 · {watts}w · {celsius}c
-          </span>
-          <span className="hidden sm:inline">1–7 servers</span>
-        </div>
-        <div className="flex min-w-0 items-center gap-1.5 text-[10px] leading-none sm:text-[11px]">
-          <span className="shrink-0 text-[#ff9a2e]">keys</span>
-          <span className="truncate text-[#7c8a99]">light up on click · no input</span>
-        </div>
-      </div>
+      <div ref={hostRef} className="aspect-1200/860 select-none [&>svg]:block [&>svg]:h-auto [&>svg]:w-full" />
       <output className="sr-only" aria-live="polite" aria-atomic="true">
         {announce}
       </output>
