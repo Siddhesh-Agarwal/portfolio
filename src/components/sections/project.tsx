@@ -19,7 +19,7 @@ function ProjectLink({ link }: { link: LinkInfo }) {
       href={link.url}
       target="_blank"
       rel="noreferrer noopener"
-      className="px-2 flex gap-2 text-primary text-sm items-center hover:underline visited:underline">
+      className="px-2 flex gap-2 text-primary-strong text-sm items-center hover:underline visited:underline">
       {link.name}
       <ExternalLinkIcon size={14} />
     </a>
