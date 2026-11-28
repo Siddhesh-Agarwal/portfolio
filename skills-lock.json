@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "skills": {
+    "react-compiler": {
+      "source": "saschb2b/skills",
+      "commit": "31a6a1364b73ff24f388f9e35c6e3ccd9baa7d89",
+      "sourceType": "github",
+      "skillPath": "skills/engineering/react-compiler/SKILL.md",
+      "computedHash": "fda2ffd5a3de13f8af3a3787f619cca6a6a755d9e3cf918ad37dd7b16f239fb3"
+    }
+  }
+}
