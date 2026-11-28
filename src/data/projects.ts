@@ -89,7 +89,7 @@ export const projectsOrTools: Project[] = [
       },
       { name: "Live", url: "https://pdfkit.siddhesh.cc/" },
     ],
-    tags: ["React.js", "TypeScript", "Tanstack"],
+    tags: ["TypeScript", "React.js", "Tanstack"],
     date: { year: 2026, month: 4 },
   },
   {
@@ -294,19 +294,12 @@ export const projectsOrTools: Project[] = [
   },
   {
     name: "Mandala.AI",
-    desc: "An AI-Powered Kolam/Rangoli/Mandala Generator that uses Cloudflare AI to generate images, R2 to store them and D1 to keep a track of them.",
+    desc: "An AI Kolam/Rangoli/Mandala Generator with a gallery to view other designs.",
     links: [
-      {
-        name: "GitHub",
-        url: "https://github.com/Siddhesh-Agarwal/Mandala-AI/",
-      },
-      {
-        name: "Backend",
-        url: "https://mandala-ai-backend.siddhesh-agarwal.workers.dev/",
-      },
-      { name: "Frontend", url: "https://mandala-ai.pages.dev/" },
+      { name: "GitHub", url: "https://github.com/Siddhesh-Agarwal/Mandala-AI/" },
+      { name: "Live", url: "https://mandala.siddhesh.cc/" },
     ],
-    tags: ["TypeScript", "Vite", "Hono", "Cloudflare"],
+    tags: ["TypeScript", "React.js", "Tanstack", "Cloudflare"],
     date: { year: 2025, month: 9 },
   },
   {
