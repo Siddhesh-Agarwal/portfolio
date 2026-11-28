@@ -61,7 +61,7 @@ export const projectsOrTools: Project[] = [
         name: "GitHub",
         url: "https://github.com/Siddhesh-Agarwal/tradingview-news-feed",
       },
-      { name: "Live", url: "https://pypi.org/project/tradingview-news-feed" },
+      { name: "PyPI", url: "https://pypi.org/project/tradingview-news-feed" },
     ],
     tags: ["Python", "PyPI"],
     date: { year: 2026, month: 6 },
@@ -74,7 +74,7 @@ export const projectsOrTools: Project[] = [
         name: "GitHub",
         url: "https://github.com/Siddhesh-Agarwal/ibkr-sdk",
       },
-      { name: "Live", url: "https://pypi.org/project/ibkr-sdk" },
+      { name: "PyPI", url: "https://pypi.org/project/ibkr-sdk" },
     ],
     tags: ["Python", "PyPI"],
     date: { year: 2026, month: 5 },
@@ -223,7 +223,7 @@ export const projectsOrTools: Project[] = [
   },
   {
     name: "Cryptmoji",
-    desc: "A Python library to encrypt and decrypt messages using emojis. Published on PyPI.",
+    desc: "A Python library to encrypt and decrypt messages using emojis.",
     links: [
       { name: "GitHub", url: "https://github.com/Siddhesh-Agarwal/Cryptmoji/" },
       { name: "PyPI", url: "https://pypi.org/project/cryptmoji/" },
@@ -255,7 +255,7 @@ export const projectsOrTools: Project[] = [
   },
   {
     name: "Matmath",
-    desc: "A Python library written in Cython to perform matrix and Vector operations. Published on PyPI.",
+    desc: "A Python library written in Cython to perform matrix and Vector operations.",
     links: [
       { name: "GitHub", url: "https://github.com/Siddhesh-Agarwal/matmath/" },
       { name: "PyPI", url: "https://pypi.org/project/matmath/" },
