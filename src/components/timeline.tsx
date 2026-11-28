@@ -1,4 +1,4 @@
-import { type ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { type ReactNode, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 type TimelineItem = {
   key: string;
@@ -40,7 +40,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
   const [progress, setProgress] = useState(0);
   const [activeCount, setActiveCount] = useState(0);
 
-  const measure = useCallback(() => {
+  const measure = () => {
     const container = containerRef.current;
     if (!container) return;
 
@@ -68,9 +68,9 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
 
     railRef.current = next;
     setRail((current) => (sameRail(current, next) ? current : next));
-  }, [items.length]);
+  };
 
-  const update = useCallback(() => {
+  const update = () => {
     frameRef.current = null;
 
     const container = containerRef.current;
@@ -102,12 +102,12 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
       lastActive.current = passed;
       setActiveCount(passed);
     }
-  }, []);
+  };
 
-  const scheduleUpdate = useCallback(() => {
+  const scheduleUpdate = () => {
     if (frameRef.current !== null) return;
     frameRef.current = requestAnimationFrame(update);
-  }, [update]);
+  };
 
   useLayoutEffect(() => {
     measure();
@@ -139,7 +139,10 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
       observer?.disconnect();
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", handleResize);
-      if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
+      if (frameRef.current !== null) {
+        cancelAnimationFrame(frameRef.current);
+        frameRef.current = null;
+      }
     };
   }, [measure, scheduleUpdate]);
 

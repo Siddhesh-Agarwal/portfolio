@@ -26,7 +26,15 @@
   },
   "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
-    "enabled": true
+    "enabled": true,
+    "rules": {
+      "nursery": {
+        "useReactCompiler": "error"
+      },
+      "a11y": {
+        "useSemanticElements": "off"
+      }
+    }
   },
   "javascript": {
     "formatter": {
